@@ -402,11 +402,11 @@ class InformeController extends Controller
         //Consulta de Inmuebles
 
         $ventas = DB::table('ventas as v')
-        ->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
+        //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
         ->join('clientes as c', 'c.id', '=', 'v.cliente_id')
         ->join('vendedores as ven', 'ven.id', '=', 'v.vendedor_id')
         ->select('v.id', 'v.fact_nro','v.nro_recibo', 'v.iva5', 'v.iva10', 'v.ivaTotal', 'v.exenta', 'v.fecha',
-        'v.total', 'v.estado', 'c.nombre','cot.dolVenta','cot.psVenta','cot.rsVenta')
+        'v.total', 'v.estado', 'c.nombre')
         ->where('v.estado', '=', "0");
 
         if ($date1 != null && $date2 != null) 
@@ -457,10 +457,10 @@ class InformeController extends Controller
         //Consulta de Inmuebles
 
         $ventas = DB::table('ventas as v')
-        ->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
+        //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
         ->join('clientes as c', 'c.id', '=', 'v.cliente_id')
         ->select('v.id', 'v.fact_nro','v.nro_recibo', 'v.iva5', 'v.iva10', 'v.ivaTotal', 'v.exenta', 'v.fecha',
-        'v.total', 'v.estado', 'c.nombre','cot.dolVenta','cot.psVenta','cot.rsVenta')
+        'v.total', 'v.estado', 'c.nombre')
         ->where('v.estado', '=', "0");
 
         if ($date1 == null && $date2 == null) {
@@ -497,10 +497,10 @@ class InformeController extends Controller
         $date2 = $request->fecha2;
 
         $ventas = DB::table('ventas as v')
-        ->join('cotizaciones as cot','v.cotiz_id','=','v.cotiz_id')
+        //->join('cotizaciones as cot','v.cotiz_id','=','v.cotiz_id')
         ->join('clientes as c', 'c.id', '=', 'v.cliente_id')
         ->select('v.id', 'v.fact_nro','v.nro_recibo', 'v.iva5', 'v.iva10', 'v.ivaTotal', 'v.exenta', 'v.fecha',
-        'v.total', 'v.estado', 'c.nombre','cot.dolVenta','cot.psVenta','cot.rsVenta')
+        'v.total', 'v.estado', 'c.nombre')
         ->where('v.estado', '=', "0");
 
         $compras = DB::table('compras as com')
@@ -642,28 +642,28 @@ class InformeController extends Controller
 
         if (($date1 == null) || ($date2 == null)) {
             $ventas = DB::table('ventas as v')
-            ->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
+            //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
             ->join('ventas_det as vdet', 'v.id', '=', 'vdet.venta_id')
             ->join('productos as p', 'p.id', '=', 'vdet.producto_id')
-            ->select('p.cod_barra', 'p.descripcion','cot.dolVenta','cot.psVenta','cot.rsVenta', 
+            ->select('p.cod_barra', 'p.descripcion',
             DB::raw('sum(vdet.cantidad) as cantidad'), 
             DB::raw('sum(vdet.cantidad * vdet.precio) as total'))
             ->where('v.estado', '=', "0")
-            ->groupBy('p.cod_barra', 'p.descripcion','cot.dolVenta','cot.psVenta','cot.rsVenta')
+            ->groupBy('p.cod_barra', 'p.descripcion',)
             ->orderBy('total', 'desc')
             ->get();
 
         } else {
             $ventas = DB::table('ventas as v')
-            ->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
+            //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
             ->join('ventas_det as vdet', 'v.id', '=', 'vdet.venta_id')
             ->join('productos as p', 'p.id', '=', 'vdet.producto_id')
-            ->select('p.cod_barra', 'p.descripcion','cot.dolVenta','cot.psVenta','cot.rsVenta',
+            ->select('p.cod_barra', 'p.descripcion',
             DB::raw('sum(vdet.cantidad) as cantidad'), 
             DB::raw('sum(vdet.cantidad * vdet.precio) as total'))                
             ->where('v.estado', '=', "0")
             ->whereBetween('v.fecha', [$date1, $date2])
-            ->groupBy('p.cod_barra', 'p.descripcion','cot.dolVenta','cot.psVenta','cot.rsVenta')
+            ->groupBy('p.cod_barra', 'p.descripcion')
             ->orderBy('total', 'desc')
             ->get();
 

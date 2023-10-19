@@ -83,7 +83,7 @@
                             <div class="col-md-4">
                                 <label class="col-md-3 form-control-label" for="precio">Precio</label>
                                 <div class="mb-3">
-                                    <input type="text" id="precio" name="precio" class="form-control" placeholder="Ingrese precio">
+                                    <input type="text" id="precio" name="precio" class="form-control number" placeholder="Ingrese precio">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -111,22 +111,22 @@
                                     <tfoot>
                                         <tr>
                                             <th  colspan="4"><p align="right">TOTAL:</p></th>
-                                            <th><p align="right"><span id="total_html">USD. 0.00</span></th>
+                                            <th><p align="right"><span id="total_html">Gs. 0.00</span></th>
                                         </tr>
 
                                         <tr>
                                             <th colspan="4"><p align="right">TOTAL IVA (5%):</p></th>
-                                            <th><p align="right"><span id="total_iva_5_html">USD. 0.00</span><input type="hidden" name="total_iva_5" id="total_iva_5"></p></th>
+                                            <th><p align="right"><span id="total_iva_5_html">Gs. 0.00</span><input type="hidden" name="total_iva_5" id="total_iva_5"></p></th>
                                         </tr>
 
                                         <tr>
                                             <th colspan="4"><p align="right">TOTAL IVA (10%):</p></th>
-                                            <th><p align="right"><span id="total_iva_html">USD. 0.00</span><input type="hidden" name="total_iva" id="total_iva"></p></th>
+                                            <th><p align="right"><span id="total_iva_html">Gs. 0.00</span><input type="hidden" name="total_iva" id="total_iva"></p></th>
                                         </tr>
 
                                         <tr>
                                             <th  colspan="4"><p align="right">TOTAL PAGAR:</p></th>
-                                            <th><p align="right"><span align="right" id="total_pagar_html">USD. 0.00</span> <input type="hidden" name="total_pagar" id="total_pagar"></p></th>
+                                            <th><p align="right"><span align="right" id="total_pagar_html">Gs. 0.00</span> <input type="hidden" name="total_pagar" id="total_pagar"></p></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -268,36 +268,35 @@
             }
 
             if(producto_id !="" && cantidad!="" && cantidad>0 && precio!=""){
-               precioFinal = precio.replaceAll(",",".");
-               console.log(precioFinal);
+               precioFinal = precio.replaceAll(".","");
+               
                subtotal[cont]=(cantidad*precioFinal);
                total= total+subtotal[cont];
-               console.log(subtotal[cont]);
+               
                //funcion para agregar separador de miles
-                var formatNumber = {
-                separador: ",", // separador para los miles
-                sepDecimal: '.', // separador para los decimales
-                formatear: function(num) {
-                    num += '';
-                    var splitStr = num.split(',');
+               var formatNumber = {
+                    separador: ".", // separador para los miles
+                    sepDecimal: ',', // separador para los decimales
+                    formatear:function (num){
+                    num +='';
+                    var splitStr = num.split('.');
                     var splitLeft = splitStr[0];
                     //var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
                     var regx = /(\d+)(\d{3})/;
                     while (regx.test(splitLeft)) {
-                        splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+                    splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
                     }
                     return this.simbol + splitLeft;
-                },
-                new: function(num, simbol) {
-                    this.simbol = simbol || '';
+                    },
+                    new:function(num, simbol){
+                    this.simbol = simbol ||'';
                     return this.formatear(num);
+                    }
                 }
-            }
 
                //totales para la vista
                subtotalVista[cont]=formatNumber.new(subtotal[cont]);
                totalVista=formatNumber.new (total);
-               console.log(subtotalVista[cont]);
 
                var fila= '<tr class="selected" id="fila'+cont+'"><td><button type="button" class="btn btn-danger btn-sm" onclick="eliminar('+cont+');"><i class="fa fa-times fa-2x"></i></button></td> <td><input type="hidden" name="producto_id[]" value="'+producto_id+'">'+producto+'</td> <td><input readonly type="text" id="precio[]" name="precio[]"  value="'+precio+'"> </td>  <td><input readonly type="number" name="cantidad[]" value="'+cantidad+'"> </td> <td>USD. '+subtotalVista[cont]+' </td></tr>';
                cont++;
@@ -332,32 +331,32 @@
         function totales(){
 
             var formatNumber = {
-            separador: ",", // separador para los miles
-            sepDecimal: '.', // separador para los decimales
-            formatear: function(num) {
-                num += '';
-                var splitStr = num.split(',');
-                var splitLeft = splitStr[0];
-                //var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
-                var regx = /(\d+)(\d{3})/;
-                while (regx.test(splitLeft)) {
+                    separador: ".", // separador para los miles
+                    sepDecimal: ',', // separador para los decimales
+                    formatear:function (num){
+                    num +='';
+                    var splitStr = num.split('.');
+                    var splitLeft = splitStr[0];
+                    //var splitRight = splitStr.length > 1 ? this.sepDecimal + splitStr[1] : '';
+                    var regx = /(\d+)(\d{3})/;
+                    while (regx.test(splitLeft)) {
                     splitLeft = splitLeft.replace(regx, '$1' + this.separador + '$2');
+                    }
+                    return this.simbol + splitLeft;
+                    },
+                    new:function(num, simbol){
+                    this.simbol = simbol ||'';
+                    return this.formatear(num);
+                    }
                 }
-                return this.simbol + splitLeft;
-            },
-            new: function(num, simbol) {
-                this.simbol = simbol || '';
-                return this.formatear(num);
-            }
-        }
 
-           $("#total_html").html("USD. " + formatNumber.new(total));
-           $("#total").html("USD. " + total);
+           $("#total_html").html("Gs. " + formatNumber.new(total));
+           $("#total").html("Gs. " + total);
            //total_iva=total*iva/100;
            total_iva=Math.round(total/iva);
            total_pagar=total;
-           $("#total_iva_html").html("USD. " + formatNumber.new(total_iva));
-           $("#total_pagar_html").html("USD. " + formatNumber.new(total_pagar));
+           $("#total_iva_html").html("Gs. " + formatNumber.new(total_iva));
+           $("#total_pagar_html").html("Gs. " + formatNumber.new(total_pagar));
            $("#total_pagar").val(total_pagar);
            $("#total_iva").val(total_iva);
 
@@ -384,9 +383,9 @@
            total_iva=Math.round(total/iva);
            total_pagar_html = total;
 
-           $("#total_html").html("USD." + total);
-           $("#total_iva_html").html("USD." + total_iva);
-           $("#total_pagar_html").html("USD." + total_pagar_html);
+           $("#total_html").html("Gs." + total);
+           $("#total_iva_html").html("Gs." + total_iva);
+           $("#total_pagar_html").html("Gs." + total_pagar_html);
            $("#total_pagar").val(total_pagar_html);
 
            $("#fila" + index).remove();

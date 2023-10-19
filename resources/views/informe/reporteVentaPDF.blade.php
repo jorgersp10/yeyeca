@@ -141,7 +141,7 @@
     </style>
    
     <header>
-        <h3 id="titulo" class="text-center">Tati e Hijos S.A. Suc. II</h3>
+        <h3 id="titulo" class="text-center">MF - Moda Femenina</h3>
         <h3 id="titulo" class="text-center">Ventas por rango de Fecha</h3>   
         @if(($date1 == null || $date2 == null))
         <h3 >Rango de Fecha: Todas las fechas</h3>
@@ -182,8 +182,8 @@
                             <td>Ticket. {{$v->nro_recibo}}</td> 
                         @endif
                         <td>{{ date('d-m-Y', strtotime($v->fecha)) }}</td>                             
-                        <td>USD. {{number_format(($v->ivaTotal), 2, ".", ",")}}</td>
-                        <td>USD. {{number_format(($v->total), 2, ".", ",")}}</td>                                                                     
+                        <td>Gs. {{number_format(($v->ivaTotal), 0, ",", ".")}}</td>
+                        <td>Gs. {{number_format(($v->total), 0, ",", ".")}}</td>                                                                     
                     </tr>
                 @php
                     $total_iva=$total_iva + $v->ivaTotal;
@@ -192,13 +192,13 @@
                 </tbody>
             @endforeach       
             <tr id="totales">       
-                <td >TOTALES USD</td>                             
+                <td >TOTALES Gs</td>                             
                 <td></td>
                 <td></td>                             
-                <td>USD. {{number_format(($total_iva), 2, ".", ",")}}</td>
-                <td>USD. {{number_format(($total_venta), 2, ".", ",")}}</td>                                                                     
+                <td>Gs. {{number_format(($total_iva), 0, ",", ".")}}</td>
+                <td>Gs. {{number_format(($total_venta), 0, ",", ".")}}</td>                                                                     
             </tr>   
-            <tr id="totales">       
+            {{-- <tr id="totales">       
                 <td >TOTALES Gs.</td>                             
                 <td></td>
                 <td></td>                             
@@ -218,7 +218,7 @@
                 <td></td>                             
                 <td>R$. {{number_format(($total_iva * ($v->rsVenta)), 2, ",", ".")}}</td>
                 <td>R$. {{number_format(($total_venta * ($v->rsVenta)), 2, ",", ".")}}</td>                                                                     
-            </tr>
+            </tr> --}}
             </table>
            
         </div>

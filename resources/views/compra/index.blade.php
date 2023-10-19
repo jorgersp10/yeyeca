@@ -90,10 +90,10 @@
                                                         </button>
                                                     </a>
                                                 </td>
-                                                <td>{{$co->fecha}}</td>
+                                                <td>{{ date('d-m-Y', strtotime($co->fecha)) }}</td>
                                                 <td>{{$co->fact_compra}}</td>
                                                 <td>{{$co->nombre}}</td>
-                                                <td>USD. {{number_format(($co->total), 2, ".", ",")}}</td>
+                                                <td>Gs. {{number_format(($co->total), 0, ",", ".")}}</td>
                                                 @if($co->estado_pago == "P")
                                                     <td>PENDIENTE</td>
                                                 @else

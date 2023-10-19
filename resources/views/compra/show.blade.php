@@ -57,8 +57,8 @@
                         <tr class="bg-info">
                             <th>Cantidad</th>
                             <th>Producto</th>
-                            <th>Precio (USD.)</th>                        
-                            <th>SubTotal (USD.)</th>
+                            <th>Precio (Gs.)</th>                        
+                            <th>SubTotal (Gs.)</th>
                         </tr>
                     </thead>
                     
@@ -66,17 +66,17 @@
 
                         <tr>
                             <th  colspan="3"><p align="right">TOTAL:</p></th>
-                            <th><p align="right">USD. {{number_format(($compras->total), 2, ".", ",")}}</p></th>
+                            <th><p align="right">Gs. {{number_format(($compras->total), 0, ",", ".")}}</p></th>
                         </tr>
 
                         <tr>
                             <th colspan="3"><p align="right">TOTAL IMPUESTO (10%):</p></th>
-                            <th><p align="right">USD. {{number_format(($compras->total*10/100), 2, ".", ",")}}</p></th>
+                            <th><p align="right">Gs. {{number_format(($compras->total/11), 0, ",", ".")}}</p></th>
                         </tr>
 
                         <tr>
                             <th  colspan="3"><p align="right">TOTAL PAGAR:</p></th>
-                            <th><p align="right">USD. {{number_format($compras->total, 2, ".", ",")}}</p></th>
+                            <th><p align="right">Gs. {{number_format($compras->total, 0, ",", ".")}}</p></th>
                         </tr> 
 
                     </tfoot>
@@ -88,8 +88,8 @@
                         <tr>
                         <td>{{$det->cantidad}}</td>
                         <td>{{$det->producto}}</td>
-                        <td>USD. {{number_format(($det->precio), 2, ".", ",")}}</td>
-                        <td>USD. {{number_format(($det->cantidad*$det->precio), 2, ".", ",")}}</td>
+                        <td>Gs. {{number_format(($det->precio), 0, ",", ".")}}</td>
+                        <td>Gs. {{number_format(($det->cantidad*$det->precio), 0, ",", ".")}}</td>
                         </tr> 
 
                     @endforeach
@@ -136,12 +136,12 @@
                                             @foreach($pagos as $ar)
                                                 <tr>                                    
                                                     <td>{{ date('d-m-Y', strtotime($ar->fec_pag)) }}</td>
-                                                    <td>{{number_format(($ar->total_pag), 2, ".", ",")}} </td>  
-                                                    <td>{{number_format($ar->total_pagf, 2, ".", ",")}}</td>
-                                                    <td>{{number_format($ar->total_pagtr, 2, ".", ",")}}</td>
-                                                    <td>{{number_format($ar->total_pagch, 2, ".", ",")}}</td>
-                                                    <td>{{number_format($ar->total_pagtd, 2, ".", ",")}}</td>
-                                                    <td>{{number_format($ar->total_pagtc, 2, ".", ",")}}</td>                          
+                                                    <td>{{number_format(($ar->total_pag), 0, ",", ".")}} </td>  
+                                                    <td>{{number_format($ar->total_pagf, 0, ",", ".")}}</td>
+                                                    <td>{{number_format($ar->total_pagtr, 0, ",", ".")}}</td>
+                                                    <td>{{number_format($ar->total_pagch, 0, ",", ".")}}</td>
+                                                    <td>{{number_format($ar->total_pagtd, 0, ",", ".")}}</td>
+                                                    <td>{{number_format($ar->total_pagtc, 0, ",", ".")}}</td>                          
                                                 </tr>  
                                                 @php
                                                     $totaldia=$totaldia + $ar->total_pag;  
@@ -155,12 +155,12 @@
                                         <tr class="table-dark">  
      
                                             <td>Total</td>                                                 
-                                            <td>USD. {{number_format(($totaldia), 2, ".", ",")}}</td>  
-                                            <td>USD. {{number_format(($totalefe), 2, ".", ",")}}</td> 
-                                            <td>USD. {{number_format(($totaltran), 2, ".", ",")}}</td> 
-                                            <td>USD. {{number_format(($totalche), 2, ".", ",")}}</td> 
-                                            <td>USD. {{number_format(($totaltd), 2, ".", ",")}}</td> 
-                                            <td>USD. {{number_format(($totaltc), 2, ".", ",")}}</td>                                               
+                                            <td>Gs. {{number_format(($totaldia), 0, ",", ".")}}</td>  
+                                            <td>Gs. {{number_format(($totalefe), 0, ",", ".")}}</td> 
+                                            <td>Gs. {{number_format(($totaltran), 0, ",", ".")}}</td> 
+                                            <td>Gs. {{number_format(($totalche), 0, ",", ".")}}</td> 
+                                            <td>Gs. {{number_format(($totaltd), 0, ",", ".")}}</td> 
+                                            <td>Gs. {{number_format(($totaltc), 0, ",", ".")}}</td>                                               
                                         </tr>
                                     </tbody>
                                     @endif
@@ -170,7 +170,7 @@
                                     @endphp
                                     <tr class="table-dark">  
                                             <td>Saldo a Pagar</td>                                                 
-                                            <td>USD. {{number_format(($saldopago), 2, ".", ",")}}</td>                                              
+                                            <td>Gs. {{number_format(($saldopago), 0, ",", ".")}}</td>                                              
                                         </tr>
                                 </table>
                             </div>

@@ -110,7 +110,7 @@
                                                             <i class="fa fa-print fa-1x"></i> TICKET
                                                         </button>
                                                     </a> --}}
-                                                    <a href="{{url('/imprimirTicket',array($ven->id,"TODO"))}}" target="_blank">
+                                                    {{-- <a href="{{url('/imprimirTicket',array($ven->id,"TODO"))}}" target="_blank">
                                                         <button type="button" class="btn btn-warning btn-sm" >
                                                             <i class="fa fa-print fa-1x"></i> TICKET
                                                         </button>
@@ -124,17 +124,17 @@
                                                         <button type="button" class="btn btn-info btn-sm" >
                                                             <i class="fa fa-print fa-1x"></i> P$
                                                         </button>
-                                                    </a>
+                                                    </a> --}}
                                                     <a href="{{url('/imprimirTicket',array($ven->id,"GS"))}}" target="_blank">
-                                                        <button type="button" class="btn btn-success btn-sm" >
-                                                            <i class="fa fa-print fa-1x"></i> GS
+                                                        <button type="button" class="btn btn-warning btn-sm" >
+                                                            <i class="fa fa-print fa-1x"></i> TICKET
                                                         </button>
                                                     </a>
-                                                    <a href="{{url('/imprimirTicket',array($ven->id,"RS"))}}" target="_blank">
+                                                    {{-- <a href="{{url('/imprimirTicket',array($ven->id,"RS"))}}" target="_blank">
                                                         <button type="button" class="btn btn-dark btn-sm" >
                                                             <i class="fa fa-print fa-1x"></i> R$
                                                         </button>
-                                                    </a>
+                                                    </a> --}}
                                                 </td>    
                                                 @endif
                                                 <td>                                     
@@ -151,8 +151,8 @@
                                                     <td>{{$ven->nro_recibo}}</td>
                                                 @endif
                                                 <td>{{$ven->nombre}}</td>
-                                                <td>USD. {{number_format(($ven->total), 2, ".", ",")}}</td>
-                                                <td>USD. {{number_format(($ven->total/11), 2, ".", ",")}}</td>
+                                                <td>Gs. {{number_format(($ven->total), 0, ",", ".")}}</td>
+                                                <td>Gs. {{number_format(($ven->total/11), 0, ",", ".")}}</td>
                                                 <td><button type="button" class="btn btn-secondary btn-sm" data-id_venta="{{$ven->id}}" data-bs-toggle="modal" data-bs-target="#cambiarVendedor">
                                                     <i class="fa fa-times fa-1x"></i> {{$ven->vendedor}}
                                                 </button></td>

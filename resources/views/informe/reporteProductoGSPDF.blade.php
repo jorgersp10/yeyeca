@@ -141,7 +141,7 @@
     </style>
 
     <header>
-        <h3 id="titulo" class="text-center">Tati e Hijos S.A. Suc. II</h3>
+        <h3 id="titulo" class="text-center">MF - Moda Femenina</h3>
         <h3 id="titulo" class="text-center">Productos más vendidos por monto</h3>
 
     </header>
@@ -159,7 +159,7 @@
             <table id="letratabla" class="table table-bordered table-striped table-sm">
                 <thead>
                     <tr>
-                        <th>Cod.Barra</th>
+                        <th>Codigo</th>
                         <th>Producto</th>
                         <th>Cantidad</th>
                         <th>Monto</th>
@@ -171,7 +171,7 @@
                         <td>{{$com->cod_barra}}</td>
                         <td>{{$com->descripcion}}</td>
                         <td>{{$com->cantidad}}</td>
-                        <td>USD. {{number_format(($com->total), 2, ".", ",")}}</td>
+                        <td>Gs. {{number_format(($com->total), 0, ",", ".")}}</td>
                     </tr>
                 </tbody>
             @endforeach

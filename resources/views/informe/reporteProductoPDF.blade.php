@@ -141,7 +141,7 @@
     </style>
 
     <header>
-        <h3 id="titulo" class="text-center">Tati e Hijos S.A. Suc. II</h3>
+        <h3 id="titulo" class="text-center">MF - Moda Femenina/h3>
         <h3 id="titulo" class="text-center">Productos más vendidos</h3>
     </header>
 
@@ -159,7 +159,7 @@
             <table id="letratabla" class="table table-bordered table-striped table-sm">
                 <thead>
                     <tr>
-                        <th>Cod.Barra</th>
+                        <th>Codigo</th>
                         <th>Producto</th>
                         <th>Cantidad</th>
                     </tr>

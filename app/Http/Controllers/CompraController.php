@@ -139,7 +139,7 @@ class CompraController extends Controller
 
             $compra = new Compra();
             $compra->proveedor_id = $request->proveedor_id;
-            $compra->cotiz_id = $cotizaciones->id;
+            $compra->cotiz_id = 0;
             $compra->fact_compra = $request->fact_compra;
             $compra->fecha = $fecha_hoy->toDateString();
             $compra->iva = $request->total_iva;
@@ -156,7 +156,7 @@ class CompraController extends Controller
             $producto_id=$request->producto_id;
             $cantidad = str_replace(",", ".", $request->cantidad);
 
-            $precio = str_replace(",", ".", $request->precio);
+            $precio = str_replace(".", "", $request->precio);
 
            
             $cont=0;
@@ -169,12 +169,12 @@ class CompraController extends Controller
                 $detalle->compra_id = $compra->id;
                 $detalle->producto_id = $producto_id[$cont];
                 $detalle->cantidad = $cantidad[$cont];
-                $detalle->precio = str_replace(",", ".", $precio[$cont]);   
+                $detalle->precio = str_replace(".", "", $precio[$cont]);   
                 $detalle->save();
                 
                 //ACTULIZAR EL PRECIO DE COMPRA DEL PRODUCTO
                 $producto = Producto::findOrFail($producto_id[$cont]);
-                if($producto->precio_compra != (str_replace(",", ".", $precio[$cont])))
+                if($producto->precio_compra != (str_replace(".", "", $precio[$cont])))
                 {
                     //CONSULTA PARA VERIFICAR EXISTENCIA EN EL HISTORICO Y ACTULIZAR O GENERAR REGISTRO NUEVO
                     $precio_hist=DB::table('precios_historico as ph')
@@ -187,7 +187,7 @@ class CompraController extends Controller
                         $histprecio = new Precio_historico();
                         $histprecio->producto_id = $producto_id[$cont];
                         $histprecio->preciocompra_ant = 0;
-                        $histprecio->preciocompra_act = str_replace(",", ".", $precio[$cont]);
+                        $histprecio->preciocompra_act = str_replace(".", "", $precio[$cont]);
                         $histprecio->save();
                     } 
                     //SINO ACTUALIZA EL REGISTRO
@@ -196,13 +196,13 @@ class CompraController extends Controller
                         $histprecioID = Precio_historico::where('producto_id', $producto_id[$cont])->get();
                         $histprecio= Precio_historico::findOrFail($histprecioID[0]->id);                        
                         $histprecio->preciocompra_ant = $histprecio->preciocompra_act;
-                        $histprecio->preciocompra_act = str_replace(",", ".", $precio[$cont]);
+                        $histprecio->preciocompra_act = str_replace(".", "", $precio[$cont]);
                         $histprecio->update();
                     }                  
                     
                 }
                 
-                $producto->precio_compra = str_replace(",", ".", $precio[$cont]);
+                $producto->precio_compra = str_replace(".", "", $precio[$cont]);
                 $producto->update();
                 $cont=$cont+1;                
             }

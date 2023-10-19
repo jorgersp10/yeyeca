@@ -120,13 +120,13 @@
                                 {{csrf_field()}} 
                             </form> 
                         </li> -->
-                        <li>
+                        {{-- <li>
                             <a class="waves-effect" href="{{url('cotizacion')}}" onclick="event.preventDefault(); document.getElementById('cotizacion-form').submit();">
                             <span>Cotización</span></a>
                             <form id="cotizacion-form" action="{{url('cotizacion')}}" method="GET" style="display: none;">
                                 {{csrf_field()}} 
                                 </form>
-                        </li>
+                        </li> --}}
                     </ul>
                      
                 </li>

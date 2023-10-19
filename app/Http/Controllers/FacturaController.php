@@ -245,6 +245,7 @@ class FacturaController extends Controller
 
    public function store(Request $request)
    {
+        //dd($request);
         //DATOS PARA ENVIAR AL CREATE
          /*listar las clientes en ventana modal*/
         $clientes=DB::table('clientes')->get();
@@ -346,7 +347,7 @@ class FacturaController extends Controller
             $venta->suc_nro = $timbrados[0]->nrof_suc;
             $venta->expendio_nro = $timbrados[0]->nrof_expendio;
             $venta->contable = $request->contable;
-            $venta->cotiz_id = $cotizaciones->id;
+            $venta->cotiz_id = 0;
             $venta->vendedor_id = $request->vendedor_id;
             //dd($venta);
             $venta->save();
@@ -357,7 +358,7 @@ class FacturaController extends Controller
             $producto_id=$request->producto_id;
             $cantidad = str_replace(",", ".", $request->cantidad);
             $cantidad_calculo = $request->cantidad_calculo;
-            $precio=str_replace(",",".",$request->precio);
+            $precio=str_replace(".","",$request->precio);
         
             $cont=0;
             //dd($producto_id);
@@ -376,7 +377,7 @@ class FacturaController extends Controller
                 $detalle->producto_id = $producto_id[$cont];
                 $detalle->cantidad = $cantidad[$cont];
                 $detalle->cantidad_calculo = $cantidad_calculo[$cont];
-                $detalle->precio = str_replace(",",".",$precio[$cont]);    
+                $detalle->precio = str_replace(".","",$precio[$cont]);    
                 //dd($detalle);
                 $detalle->save();
 
@@ -396,35 +397,35 @@ class FacturaController extends Controller
                 $pagoEfectivo = 0;
             }
             else{
-                $pagoEfectivo = str_replace(",",".",$request->total_pagadof);
+                $pagoEfectivo = str_replace(".","",$request->total_pagadof);
             }
             if($request->total_pagadoch == null)
             {
                 $pagoCheque = 0;
             }
             else{
-                $pagoCheque = str_replace(",",".",$request->total_pagadoch);
+                $pagoCheque = str_replace(".","",$request->total_pagadoch);
             }
             if($request->total_pagadotc == null)
             {
                 $pagoCredito = 0;
             }
             else{
-                $pagoCredito = str_replace(",",".",$request->total_pagadotc);
+                $pagoCredito = str_replace(".","",$request->total_pagadotc);
             }
             if($request->total_pagadotd == null)
             {
                 $pagoDebito = 0;
             }
             else{
-                $pagoDebito = str_replace(",",".",$request->total_pagadotd);
+                $pagoDebito = str_replace(".","",$request->total_pagadotd);
             }
             if($request->total_pagadotr == null)
             {
                 $pagoTransfer = 0;
             }
             else{
-                $pagoTransfer = str_replace(",",".",$request->total_pagadotr);
+                $pagoTransfer = str_replace(".","",$request->total_pagadotr);
             }                   
             //EGRESOS
             if($request->total_vuelto == null)
@@ -432,7 +433,7 @@ class FacturaController extends Controller
                 $vueloCaja = 0;
             }
             else{
-                $vueloCaja = str_replace(",",".",$request->total_vuelto);
+                $vueloCaja = str_replace(".","",$request->total_vuelto);
             }
 
             $ingreso=($pagoEfectivo + $pagoCheque + $pagoDebito + $pagoTransfer)- $vueloCaja;
@@ -611,17 +612,17 @@ class FacturaController extends Controller
         $cabVenta=DB::table('ventas as v')
         ->join('ventas_det as vdet','v.id','=','vdet.venta_id')
         ->join('clientes as c','c.id','=','v.cliente_id')
-        ->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
+        //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
         ->join('vendedores as ven','ven.id','=','v.vendedor_id')
         ->select('v.id','v.fact_nro','v.fecha','v.total','c.nombre','v.iva5',
         'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo',
-        'cot.dolVenta','cot.psVenta','cot.rsVenta','ven.nombre as vendedor'
+        'ven.nombre as vendedor'
         ,DB::raw('sum(vdet.cantidad_calculo*precio) as total'))
         ->where('v.id','=',$id)
         ->orderBy('v.id', 'desc')
         ->groupBy('v.id','v.fact_nro','v.fecha','v.total','c.nombre','v.iva5',
         'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo',
-        'cot.dolVenta','cot.psVenta','cot.rsVenta','ven.nombre')
+        'ven.nombre')
         ->first();
 
         /*mostrar detalles*/
@@ -636,7 +637,7 @@ class FacturaController extends Controller
         $fpdf->AddPage();
         // CABECERA
         $fpdf->SetFont('Helvetica','',10);
-        $fpdf->Cell(40,4,'Taty e hijos S.A. Suc. II',0,1,'C');
+        $fpdf->Cell(40,4,'MF - Moda Femenina',0,1,'C');
         $fpdf->Ln(1);
         $fpdf->SetFont('Helvetica','',8);
         // $fpdf->Cell(60,4,'Productos de limpieza, cobranzas y accesorios en gral.',0,1,'C');
@@ -808,8 +809,8 @@ class FacturaController extends Controller
                 $fpdf->SetFont('Helvetica', '', 7);
                 $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
-                $fpdf->Cell(10, -5, number_format(($row->precio* $cabVenta->dolVenta), 0, ",", "."),0,0,'R');
-                $fpdf->Cell(15, -5, "Gs. ".number_format(($row->precio*$row->cantidad_calculo* $cabVenta->dolVenta), 0, ",", "."),0,0,'R');
+                $fpdf->Cell(10, -5, number_format(($row->precio), 0, ",", "."),0,0,'R');
+                $fpdf->Cell(15, -5, "Gs. ".number_format(($row->precio*$row->cantidad_calculo), 0, ",", "."),0,0,'R');
                 $fpdf->Ln(3);
 
                 $total_cantidad = $total_cantidad + $row->cantidad;
@@ -818,9 +819,9 @@ class FacturaController extends Controller
             $fpdf->Cell(50,0,'','T');
             $fpdf->Ln(1);
             //HALLAMOS LOS PRECIOS EN OTRAS MONEDAS
-            $totalGs = $cabVenta->total * $cabVenta->dolVenta;
-            $totalPs = $cabVenta->total * ($cabVenta->psVenta);
-            $totalRs = $cabVenta->total * ($cabVenta->rsVenta);
+            $totalGs = $cabVenta->total;
+            $totalPs = $cabVenta->total;
+            $totalRs = $cabVenta->total;
             
             $fpdf->SetFont('Helvetica', '', 7);
             $fpdf->MultiCell(20,4,"Total ITEMS",0,'L'); 
@@ -862,7 +863,7 @@ class FacturaController extends Controller
             $fpdf->Ln(1);
             //HALLAMOS LOS PRECIOS EN OTRAS MONEDAS
             $totalGs = $cabVenta->total * $cabVenta->dolVenta;
-            $totalPs = $cabVenta->total * ($cabVenta->psVenta);
+            $totalPs = $cabVenta->total;
             $totalRs = $cabVenta->total * ($cabVenta->rsVenta);
             
             $fpdf->SetFont('Helvetica', '', 7);
@@ -896,16 +897,16 @@ class FacturaController extends Controller
         $cabVenta=DB::table('ventas as v')
         ->join('ventas_det as vdet','v.id','=','vdet.venta_id')
         ->join('clientes as c','c.id','=','v.cliente_id')
-        ->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
+        //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
         ->join('vendedores as ven','ven.id','=','v.vendedor_id')
         ->select('v.id','v.fact_nro','v.fecha','v.total','c.nombre','v.iva5',
         'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo',
-        'cot.dolVenta','cot.psVenta','cot.rsVenta','ven.nombre as vendedor'
+        'ven.nombre as vendedor'
         ,DB::raw('sum(vdet.cantidad_calculo*precio) as total'))
         ->orderBy('v.id', 'desc')
         ->groupBy('v.id','v.fact_nro','v.fecha','v.total','c.nombre','v.iva5',
         'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo',
-        'cot.dolVenta','cot.psVenta','cot.rsVenta','ven.nombre')
+        'ven.nombre')
         ->first();
 
         $venta_id = $cabVenta->id;
@@ -922,7 +923,7 @@ class FacturaController extends Controller
         $fpdf->AddPage();
         // CABECERA
         $fpdf->SetFont('Helvetica','',10);
-        $fpdf->Cell(40,4,'Taty e hijos S.A. Suc. II',0,1,'C');
+        $fpdf->Cell(40,4,'MF - Moda Femenina',0,1,'C');
         $fpdf->Ln(1);
         $fpdf->SetFont('Helvetica','',8);
         // $fpdf->Cell(60,4,'Productos de limpieza, cobranzas y accesorios en gral.',0,1,'C');
@@ -968,7 +969,7 @@ class FacturaController extends Controller
             $fpdf->Ln(1);
             //HALLAMOS LOS PRECIOS EN OTRAS MONEDAS
             $totalGs = $cabVenta->total * $cabVenta->dolVenta;
-            $totalPs = $cabVenta->total * ($cabVenta->psVenta);
+            $totalPs = $cabVenta->total;
             $totalRs = $cabVenta->total * ($cabVenta->rsVenta);
             
             $fpdf->SetFont('Helvetica', '', 7);
@@ -1094,8 +1095,8 @@ class FacturaController extends Controller
                 $fpdf->SetFont('Helvetica', '', 7);
                 $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
-                $fpdf->Cell(10, -5, number_format(($row->precio* $cabVenta->dolVenta), 0, ",", "."),0,0,'R');
-                $fpdf->Cell(15, -5, "Gs. ".number_format(($row->precio*$row->cantidad_calculo* $cabVenta->dolVenta), 0, ",", "."),0,0,'R');
+                $fpdf->Cell(10, -5, number_format(($row->precio), 0, ",", "."),0,0,'R');
+                $fpdf->Cell(15, -5, "Gs. ".number_format(($row->precio*$row->cantidad_calculo), 0, ",", "."),0,0,'R');
                 $fpdf->Ln(3);
 
                 $total_cantidad = $total_cantidad + $row->cantidad;
@@ -1104,9 +1105,9 @@ class FacturaController extends Controller
             $fpdf->Cell(50,0,'','T');
             $fpdf->Ln(1);
             //HALLAMOS LOS PRECIOS EN OTRAS MONEDAS
-            $totalGs = $cabVenta->total * $cabVenta->dolVenta;
-            $totalPs = $cabVenta->total * ($cabVenta->psVenta);
-            $totalRs = $cabVenta->total * ($cabVenta->rsVenta);
+            $totalGs = $cabVenta->total;
+            $totalPs = $cabVenta->total;
+            $totalRs = $cabVenta->total;
             
             $fpdf->SetFont('Helvetica', '', 7);
             $fpdf->MultiCell(20,4,"Total ITEMS",0,'L'); 
@@ -1195,15 +1196,13 @@ class FacturaController extends Controller
         $ventas=DB::table('ventas as v')
         ->join('ventas_det as vdet','v.id','=','vdet.venta_id')
         ->join('clientes as c','c.id','=','v.cliente_id')
-        ->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
+        //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
         ->select('v.id','v.fact_nro','v.fecha','v.total','c.nombre','v.iva5',
         'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo',
-        'cot.dolVenta','cot.psVenta','cot.rsVenta'
-        ,DB::raw('sum(vdet.cantidad_calculo*precio) as total'))
+        DB::raw('sum(vdet.cantidad_calculo*precio) as total'))
         ->orderBy('v.id', 'desc')
         ->groupBy('v.id','v.fact_nro','v.fecha','v.total','c.nombre','v.iva5',
-        'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo',
-        'cot.dolVenta','cot.psVenta','cot.rsVenta')
+        'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo')
         ->first();
 
         /*mostrar detalles*/

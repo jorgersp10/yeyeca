@@ -169,7 +169,7 @@
     </style>
 
     <header>
-        <h3 id="titulo" class="text-center">Tati e Hijos S.A. Suc. II</h3>
+        <h3 id="titulo" class="text-center">MF - Moda Femenina</h3>
         <h3 id="titulo" class="text-center">Comisiones por rango de Fecha</h3>
         @if(($date1 == null || $date2 == null))
         <h3>Rango de Fecha: Todas las fechas</h3>
@@ -213,7 +213,7 @@
                         @endif
                         <td>{{ date('d-m-Y', strtotime($v->fecha)) }}</td>
                         {{-- <td>USD. {{number_format(($v->ivaTotal), 2, ".", ",")}}</td> --}}
-                        <td>USD. {{number_format(($v->total), 2, ".", ",")}}</td>
+                        <td>Gs. {{number_format(($v->total), 0, ",", ".")}}</td>
                     </tr>
                     @php
                         $total_iva=$total_iva + $v->ivaTotal;
@@ -225,33 +225,30 @@
                     $total_comi = ($total_venta*$porcentaje)/100;
                 @endphp
                 <tr id="totales">
-                    <td>COMISION USD</td>
-                    <td>USD. {{number_format(($total_comi), 2, ".", ",")}}</td>
-                    <td>TOTALES USD</td>
-                    {{-- <td>USD. {{number_format(($total_iva), 2, ".", ",")}}</td> --}}
-                    <td>USD. {{number_format(($total_venta), 2, ".", ",")}}</td>
+                    <td>COMISION Gs</td>
+                    <td>Gs. {{number_format(($total_comi), 0, ",", ".")}}</td>
+                    <td>TOTALES Gs</td>
+                    {{-- <td>Gs. {{number_format(($total_iva), 2, ".", ",")}}</td> --}}
+                    <td>Gs. {{number_format(($total_venta), 0, ",", ".")}}</td>
                 </tr>
-                <tr id="totales">
+                {{-- <tr id="totales">
                     <td>COMISION Gs.</td>
                     <td>Gs. {{number_format(($total_comi * $v->dolVenta), 0, ",", ".")}}</td>
                     <td>TOTALES Gs.</td>
-                    {{-- <td>Gs. {{number_format(($total_iva * $v->dolVenta), 0, ",", ".")}}</td> --}}
                     <td>Gs. {{number_format(($total_venta * $v->dolVenta), 0, ",", ".")}}</td>
                 </tr>
                 <tr id="totales">
                     <td>COMISION $</td>
                     <td>$. {{number_format(($total_comi * ($v->psVenta)), 0, ",", ".")}}</td>
                     <td>TOTALES $</td>
-                    {{-- <td>$. {{number_format(($total_iva * ($v->psVenta)), 0, ",", ".")}}</td> --}}
                     <td>$. {{number_format(($total_venta * ($v->psVenta)), 0, ",", ".")}}</td>
                 </tr>
                 <tr id="totales">
                     <td>COMISION R$</td>
                     <td>R$. {{number_format(($total_comi * ($v->rsVenta)), 2, ",", ".")}}</td>
                     <td>TOTALES R$</td>
-                    {{-- <td>R$. {{number_format(($total_iva * ($v->rsVenta)), 0, ",", ".")}}</td> --}}
                     <td>R$. {{number_format(($total_venta * ($v->rsVenta)), 2, ",", ".")}}</td>
-                </tr>
+                </tr> --}}
             </table>
 
         </div>
