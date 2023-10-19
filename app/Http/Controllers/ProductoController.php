@@ -265,4 +265,28 @@ class ProductoController extends Controller
         Producto::destroy($id);
         return Redirect::to("producto");
     }
+
+    public function imprimirBarcode($id)
+    {
+        //dd($id);
+        $producto=DB::table('productos')
+        //->join('unidades_medida as uni','uni.id','=','productos.medida_id')
+        //->leftjoin('electro_img as img','img.producto_id','=','productos.id')
+        ->select('productos.id','productos.descripcion','productos.ArtCode','productos.stock'
+        ,'productos.precio_compra','productos.precio_venta','productos.precio_min','productos.precio_max',
+        'productos.cod_barra')
+        ->where('productos.id','=',$id)
+        //->where('productos.ArtCode','=','price_ora.ArtCode')
+        ->orderBy('productos.descripcion','desc')->first();        
+        //dd($producto);
+        $pruebaBar = $producto->cod_barra;
+        //dd($pruebaBar);
+        $barcode = str_pad($producto->cod_barra, 12, "0", STR_PAD_LEFT);
+        //dd($barcode);
+        //echo DNS1D::getBarcodeHTML($barcode, 'EAN13');
+        
+        return $pdf= \PDF::loadView('producto.ticket',["producto"=>$producto,"barcode"=>$barcode])
+            ->setPaper([0, 0, 120, 150], 'landscape')
+            ->stream('producto'.$producto->ArtCode.'pdf');
+    }
 }

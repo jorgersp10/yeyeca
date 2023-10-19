@@ -166,7 +166,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('pagarFactura', [CompraController::class, 'pagarFactura'])->name('pagarFactura');
 
     Route::get('indexImpresion', [ProductoController::class, 'indexImpresion'])->name('indexImpresion');
-
+    Route::get('imprimirBarcode/{id}', [ProductoController::class, 'imprimirBarcode'])->name('imprimirBarcode');
 
     Route::post('cobrarCheque', [Cheque_emitidoController::class, 'cobrarCheque'])->name('cobrarCheque');
     Route::post('cobrarChequeR', [ChequeController::class, 'cobrarChequeR'])->name('cobrarChequeR');

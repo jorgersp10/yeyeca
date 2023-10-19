@@ -59,7 +59,7 @@
                                             @if(auth()->user()->idrol == 1)
                                             <th  data-priority="1">Acciones</th> 
                                             @endif                             
-                                            <th  data-priority="1">Codigo</th>
+                                            <th  data-priority="1">Codigo/Imprimir</th>
                                             <th  data-priority="1">Nombre</th> 
                                             <th  data-priority="1">Stock</th> 
                                             <th  data-priority="1">Precio Gs.</th> 
@@ -88,7 +88,13 @@
 
                                             </td> 
                                             @endif
-                                                <td>{{$prod->cod_barra}}</td>
+                                                <td>
+                                                    <a href="{{URL::action('App\Http\Controllers\ProductoController@imprimirBarcode', $prod->id)}}" target="_blank">
+                                                    <button type="button" class="btn btn-info btn-sm" >
+                                                        <i class="fa fa-print fa-1x"></i> {{$prod->cod_barra}}
+                                                    </button>
+                                                    </a>
+                                                </td>
                                                 <td>{{$prod->descripcion}}</td>
                                                 <td>{{$prod->stock}}</td> 
                                                 <td>Gs. {{number_format(($prod->precio_venta), 0, ",", ".")}}</td>                                                                        

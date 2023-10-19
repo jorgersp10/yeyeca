@@ -56,8 +56,8 @@
                                                 <td>{{$prod->descripcion}}</td>
                                                 <td>{{$prod->cod_barra}}</td>
                                                 <td>{{$prod->stock}}</td>
-                                                <td>USD. {{number_format(($prod->precio_venta), 2, ".", ",")}}</td>
-                                                <td>USD. {{number_format(($sub_total), 2, ".", ",")}}</td>                                                                                                                                   
+                                                <td>Gs. {{number_format(($prod->precio_venta), 0, ",", ".")}}</td>
+                                                <td>Gs. {{number_format(($sub_total), 0, ",", ".")}}</td>                                                                                                                                   
                                             </tr>  
                                         @endforeach                                        
                                              <tr class="table-danger">      
@@ -65,7 +65,7 @@
                                                 <td></td>
                                                 <td>{{$total_cant}}</td>
                                                 <td></td>
-                                                <td>USD. {{number_format(($total_contado), 2, ".", ",")}}</td> 
+                                                <td>Gs. {{number_format(($total_contado), 0, ",", ".")}}</td> 
                                             </tr> 
                                     </tbody>
                                 </table>

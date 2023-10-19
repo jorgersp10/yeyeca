@@ -59,7 +59,7 @@
                         <div class="col-md-5">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">TOTAL USD</label>
                             <div class="col-sm-5">  
-                                <input readonly type="text" id="total" name="total" value = "USD {{$ventas->total}}" class="form-control">
+                                <input readonly type="text" id="total" name="total" value = "Gs. {{number_format(($ventas->total), 0, ",", ".")}}" class="form-control">
                             </div> 
                         </div> 
                         <div class="col-md-5">

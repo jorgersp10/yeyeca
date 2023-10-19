@@ -67,31 +67,31 @@ class HomeController extends Controller
             // ->with("cuentas",$cuentas);
 
             //PEDIR COTIZACIÓN ANTES DE EMPEZAR
-            $fecha_hoy = Carbon::now('America/Asuncion');
-            $fecha_hoy = $fecha_hoy->format('Y-m-d');
+            // $fecha_hoy = Carbon::now('America/Asuncion');
+            // $fecha_hoy = $fecha_hoy->format('Y-m-d');
 
-            $dolar=DB::table('cotizaciones as c')
-            //->join('empresas','clientes.idempresa','=','empresas.id')
-            ->select('c.id','c.moneda','c.dolCompra','c.dolVenta',
-            'psCompra','psVenta','rsCompra','rsVenta','c.fecha','c.estado')
-            ->where('fecha','=',$fecha_hoy)
-            ->first();
+            // $dolar=DB::table('cotizaciones as c')
+            // //->join('empresas','clientes.idempresa','=','empresas.id')
+            // ->select('c.id','c.moneda','c.dolCompra','c.dolVenta',
+            // 'psCompra','psVenta','rsCompra','rsVenta','c.fecha','c.estado')
+            // ->where('fecha','=',$fecha_hoy)
+            // ->first();
             //dd($cotizacion);
-            if($dolar==null)
-            {
-                $cotizaciones=DB::table('cotizaciones as c')
-                //->join('empresas','clientes.idempresa','=','empresas.id')
-                ->select('c.id','c.moneda','c.dolCompra','c.dolVenta',
-                'psCompra','psVenta','rsCompra','rsVenta','c.fecha','c.estado')
-                ->orderBy('c.fecha','desc')
-                ->get();
-                //return view('cotizacion.index',["cotizaciones"=>$cotizaciones])->with('msj', 'FAVOR CARGAR LA COTIZACIÓN DEL DÍA');
-                return Redirect::to("cotizacion")->with('msj', 'FAVOR CARGAR LA COTIZACIÓN DEL DÍA');
-            }
-            else
-            {
+            // if($dolar==null)
+            // {
+            //     $cotizaciones=DB::table('cotizaciones as c')
+            //     //->join('empresas','clientes.idempresa','=','empresas.id')
+            //     ->select('c.id','c.moneda','c.dolCompra','c.dolVenta',
+            //     'psCompra','psVenta','rsCompra','rsVenta','c.fecha','c.estado')
+            //     ->orderBy('c.fecha','desc')
+            //     ->get();
+            //     //return view('cotizacion.index',["cotizaciones"=>$cotizaciones])->with('msj', 'FAVOR CARGAR LA COTIZACIÓN DEL DÍA');
+            //     return Redirect::to("cotizacion")->with('msj', 'FAVOR CARGAR LA COTIZACIÓN DEL DÍA');
+            // }
+            //else
+            //{
                 return Redirect::to("factura/create");
-            }
+            //}
         }
         return abort(404);
     }
@@ -127,31 +127,31 @@ class HomeController extends Controller
         // ->with("cuentas",$cuentas);
 
          //PEDIR COTIZACIÓN ANTES DE EMPEZAR
-         $fecha_hoy = Carbon::now('America/Asuncion');
-         $fecha_hoy = $fecha_hoy->format('Y-m-d');
+        //  $fecha_hoy = Carbon::now('America/Asuncion');
+        //  $fecha_hoy = $fecha_hoy->format('Y-m-d');
 
-         $dolar=DB::table('cotizaciones as c')
-         //->join('empresas','clientes.idempresa','=','empresas.id')
-         ->select('c.id','c.moneda','c.dolCompra','c.dolVenta',
-         'psCompra','psVenta','rsCompra','rsVenta','c.fecha','c.estado')
-         ->where('fecha','=',$fecha_hoy)
-         ->first();
-         //dd($cotizacion);
-         if($dolar==null)
-         {
-             $cotizaciones=DB::table('cotizaciones as c')
-             //->join('empresas','clientes.idempresa','=','empresas.id')
-             ->select('c.id','c.moneda','c.dolCompra','c.dolVenta',
-             'psCompra','psVenta','rsCompra','rsVenta','c.fecha','c.estado')
-             ->orderBy('c.fecha','desc')
-             ->get();
-             //return view('cotizacion.index',["cotizaciones"=>$cotizaciones])->with('msj', 'FAVOR CARGAR LA COTIZACIÓN DEL DÍA');
-             return Redirect::to("cotizacion")->with('msj', 'FAVOR CARGAR LA COTIZACIÓN DEL DÍA');
-         }
-         else
-            {
+        //  $dolar=DB::table('cotizaciones as c')
+        //  //->join('empresas','clientes.idempresa','=','empresas.id')
+        //  ->select('c.id','c.moneda','c.dolCompra','c.dolVenta',
+        //  'psCompra','psVenta','rsCompra','rsVenta','c.fecha','c.estado')
+        //  ->where('fecha','=',$fecha_hoy)
+        //  ->first();
+        //  //dd($cotizacion);
+        //  if($dolar==null)
+        //  {
+        //      $cotizaciones=DB::table('cotizaciones as c')
+        //      //->join('empresas','clientes.idempresa','=','empresas.id')
+        //      ->select('c.id','c.moneda','c.dolCompra','c.dolVenta',
+        //      'psCompra','psVenta','rsCompra','rsVenta','c.fecha','c.estado')
+        //      ->orderBy('c.fecha','desc')
+        //      ->get();
+        //      //return view('cotizacion.index',["cotizaciones"=>$cotizaciones])->with('msj', 'FAVOR CARGAR LA COTIZACIÓN DEL DÍA');
+        //      return Redirect::to("cotizacion")->with('msj', 'FAVOR CARGAR LA COTIZACIÓN DEL DÍA');
+        //  }
+         //else
+            //{
                 return Redirect::to("factura/create");
-            }
+            //}
     }
 
     /*Language Translation*/
