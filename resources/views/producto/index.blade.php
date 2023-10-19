@@ -62,10 +62,7 @@
                                             <th  data-priority="1">Codigo</th>
                                             <th  data-priority="1">Nombre</th> 
                                             <th  data-priority="1">Stock</th> 
-                                            <th  data-priority="1">Pr.Dolar</th> 
-                                            <th  data-priority="1">Pr.GS</th>
-                                            <th  data-priority="1">Pr.Peso</th> 
-                                            <th  data-priority="1">Pr.Real</th> 
+                                            <th  data-priority="1">Precio Gs.</th> 
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -94,10 +91,7 @@
                                                 <td>{{$prod->cod_barra}}</td>
                                                 <td>{{$prod->descripcion}}</td>
                                                 <td>{{$prod->stock}}</td> 
-                                                <td>USD. {{number_format(($prod->precio_venta), 2, ".", ",")}}</td>
-                                                <td>Gs. {{number_format(($prod->precio_venta * $cotizaciones->dolVenta), 0, ",", ".")}}</td> 
-                                                <td>$. {{number_format(($prod->precio_venta*$cotizaciones->psVenta), 2, ",", ".")}}</td> 
-                                                <td>RS. {{number_format(($prod->precio_venta*$cotizaciones->rsVenta), 2, ",", ".")}}</td>                                                                         
+                                                <td>Gs. {{number_format(($prod->precio_venta), 0, ",", ".")}}</td>                                                                        
                                             </tr>  
                                             @include('producto.delete')
                                         @endforeach

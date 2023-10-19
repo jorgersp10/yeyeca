@@ -16,7 +16,7 @@
 <div class="menu card-header">
     
     <button style="margin: 10px" type="button" class="btn btn-primary waves-effect waves-light" data-target="#men_det">Producto</button><br>
-    <button style="margin: 10px" type="button" class="btn btn-primary waves-effect waves-light" data-target="#men_img">Imagenes</button><br>
+    <button hidden style="margin: 10px" type="button" class="btn btn-primary waves-effect waves-light" data-target="#men_img">Imagenes</button><br>
     <a href="javascript:history.back()"><button style="margin: 10px" type="button" class="btn btn-primary waves-effect waves-light">Atrás</button></a><br>
 
 
@@ -105,43 +105,23 @@
                 </div>
             </div>  
             <div class="col-md-4">
+                <label class="col-sm-3 col-form-label">Precio Guaraníes</label>
+                <div class="col-md-4">
+                    <input type="text" id="precio_venta" value="{{number_format(($producto->precio_venta), 0, ",", ".")}}" name="precio_venta" class="form-control number2" placeholder="Ingrese el precio venta">
+                </div>
+            </div>
+            <div class="col-md-4">
                 <label class="col-sm-3 col-form-label">Precio Recargo</label>
                 <div class="col-md-4">
-                    <input type="text" id="precio_tarjeta" value="{{number_format(($producto->precio_tarjeta), 2, ".", ",")}}" name="precio_tarjeta" class="form-control number2" placeholder="Ingrese el precio venta">
+                    <input type="text" id="precio_tarjeta" value="{{number_format(($producto->precio_tarjeta), 0, ",", ".")}}" name="precio_tarjeta" class="form-control number3" placeholder="Ingrese el precio venta">
                 </div>
-            </div>      
-            <div class="col-md-4">
-                <label class="col-sm-3 col-form-label">Precio Dólares</label>
-                <div class="col-md-4">
-                    <input type="text" id="precio_venta" value="{{number_format(($producto->precio_venta), 2, ".", ",")}}" name="precio_venta" class="form-control number2" placeholder="Ingrese el precio venta">
-                </div>
-            </div>
-        </div>
-        <div class="form-group row">     
-            <div class="col-md-4">
-                <label class="col-sm-4 col-form-label">Precio Guaraníes</label>
-                <div class="col-md-4">
-                    <input readonly type="text" id="precio_gs" value="{{number_format(($producto->precio_venta * $cotizaciones->dolVenta), 0, ",", ".")}}" name="precio_gs" class="form-control number2" placeholder="Ingrese el precio venta">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label class="col-sm-4 col-form-label">Precio Pesos</label>
-                <div class="col-md-4">
-                    <input readonly type="text" id="precio_ps" value="{{number_format(($producto->precio_venta*($cotizaciones->psVenta)), 2, ",", ".")}}" name="precio_ps" class="form-control number2" placeholder="Ingrese el precio venta">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <label class="col-sm-4 col-form-label">Precio Reales</label>
-                <div class="col-md-4">
-                    <input readonly type="text" id="precio_rs" value="{{number_format(($producto->precio_venta*($cotizaciones->rsVenta)), 2, ",", ".")}}" name="precio_rs" class="form-control number2" placeholder="Ingrese el precio venta">
-                </div>
-            </div>
+            </div>    
         </div>
         <div hidden class="form-group row">
             <div class="col-md-4">
                 <label for="horizontal-firstname-input" class="col-sm-4 col-form-label">Precio Mínimo</label>
                 <div class="mb-3">
-                    <input readonly type="text" id="precio_min" value="{{number_format(($producto->precio_min), 0, ",", ".")}}" name="precio_min" class="form-control number3" placeholder="Ingrese el precio minimo">
+                    <input readonly type="text" id="precio_min" value="{{number_format(($producto->precio_min), 0, ",", ".")}}" name="precio_min" class="form-control" placeholder="Ingrese el precio minimo">
                 </div>
             </div>
 

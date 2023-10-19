@@ -101,17 +101,17 @@ class ProductoController extends Controller
         if ($request->precio_venta==null)
             $producto->precio_venta = 0;
         else
-            $producto->precio_venta = str_replace(",",".",$request->precio_venta);
+            $producto->precio_venta = str_replace(".","",$request->precio_venta);
 
         if ($request->precio_tarjeta==null)
             $producto->precio_tarjeta = 0;
         else
-            $producto->precio_tarjeta = str_replace(",",".",$request->precio_tarjeta);
+            $producto->precio_tarjeta = str_replace(".","",$request->precio_tarjeta);
             
         if ($request->precio_compra==null)
             $producto->precio_compra = 0;
         else
-            $producto->precio_compra = str_replace(",",".",$request->precio_compra);
+            $producto->precio_compra = str_replace(".","",$request->precio_compra);
         
         if ($request->precio_min==null)
             $producto->precio_min = 0;
@@ -184,17 +184,17 @@ class ProductoController extends Controller
         if ($request->precio_venta==null)
             $producto->precio_venta = 0;
         else
-            $producto->precio_venta = str_replace(",",".",$request->precio_venta);
+            $producto->precio_venta = str_replace(".","",$request->precio_venta);
 
         if ($request->precio_tarjeta==null)
             $producto->precio_tarjeta = 0;
         else
-            $producto->precio_tarjeta = str_replace(",",".",$request->precio_tarjeta);
+            $producto->precio_tarjeta = str_replace(".","",$request->precio_tarjeta);
             
         if ($request->precio_compra==null)
             $producto->frente = 0;
         else
-            $producto->precio_compra = str_replace(",",".",$request->precio_compra);
+            $producto->precio_compra = str_replace(".","",$request->precio_compra);
         
         if ($request->precio_min==null)
             $producto->contrafrente = 0;
@@ -258,123 +258,7 @@ class ProductoController extends Controller
         "imagenes"=>$imagenes]);
 
     }
-
-    public function detalleCuotasInm($id){
-        
-        //dd($id);
-        //DETALLES DEL O LOS INMUEBLES
-        $id_cuota=DB::table('cuotas')
-        ->select('id')
-        ->where('inmueble_id','=',$id)
-        ->first();
-        $id_cuota_pdf= $id_cuota->id;
-        //dd($id_cuota_pdf);
-        $cantCuotas=DB::table('cuotas_det')
-        ->select('cuota_nro')
-        ->where('cuota_id','=',$id_cuota->id)
-        ->count('cuota_nro');
-
-        $cuotaCero=DB::table('cuotas_det')
-        ->select('cuota_nro')
-        ->where('cuota_id','=',$id_cuota->id)
-        ->get();
-        
-        if($cuotaCero[0]->cuota_nro == 0)
-            $cantCuotas=$cantCuotas-1;
-            else
-            $cantCuotas=$cantCuotas;
-
-        $cuotas=DB::table('cuotas as c')
-        ->join('cuotas_det as cdet','cdet.cuota_id','=','c.id')
-        ->join('inmuebles as i','c.inmueble_id','=','i.id')
-        ->join('loteamientos as l','i.loteamiento_id','=','l.id')
-        ->join('clientes as cli','c.cliente_id','=','cli.id')
-        ->select('cdet.cuota_nro as cuota_nro','cdet.capital as capital','cdet.fec_vto as fec_vto',
-        'i.descripcion as descripcion','cli.nombre as cliente','l.descripcion as urba','i.moneda as moneda')
-        ->where('inmueble_id','=',$id)
-        ->orderBy('cdet.cuota_nro')
-        ->get();
-
-
-        $pagos=DB::table('pagos as p')
-        ->join('inmuebles as i','i.id','=','p.inmueble_id')
-        ->select('p.fec_pag as fechapago','p.cuota as cuota_nro','p.cuota_id as cuota_id',
-        'p.total_pag as totalpagado','p.cuota as capitalcuota',
-        DB::raw('0 as saldo'))
-        ->where('p.inmueble_id','=',$id)
-        ->orderBy('p.cuota')
-        ->get();
-
-        
-        return view('inmueble.detalleCuotas',["cuotas"=>$cuotas, "pagos"=>$pagos,
-        "cantCuotas"=>$cantCuotas,"id_cuota_pdf"=>$id_cuota_pdf]);
-    }
-
-    public function detalleCuotasInmPDF($id){
-        
-        //dd($id);
-        //DETALLES DEL O LOS INMUEBLES
-
-        $id_inmueble=DB::table('cuotas')
-        ->select('inmueble_id')
-        ->where('id','=',$id)
-        ->first();
-        $id_inmueble = $id_inmueble ->inmueble_id;
-
-        $cantCuotas=DB::table('cuotas_det')
-        ->select('cuota_nro')
-        ->where('cuota_id','=',$id)
-        ->count('cuota_nro');
-
-        $cuotaCero=DB::table('cuotas_det')
-        ->select('cuota_nro')
-        ->where('cuota_id','=',$id)
-        ->get();
-        //dd($cuotaCero);
-        if($cuotaCero[0]->cuota_nro == 0)
-            $cantCuotas=$cantCuotas-1;
-            else
-            $cantCuotas=$cantCuotas;
-
-        $cuotas=DB::table('cuotas as c')
-        ->join('cuotas_det as cdet','cdet.cuota_id','=','c.id')
-        ->join('inmuebles as i','c.inmueble_id','=','i.id')
-        ->join('loteamientos as l','i.loteamiento_id','=','l.id')
-        ->join('clientes as cli','c.cliente_id','=','cli.id')
-        ->select('cdet.cuota_nro as cuota_nro','cdet.capital as capital','cdet.fec_vto as fec_vto',
-        'i.descripcion as descripcion','cli.nombre as cliente','l.descripcion as urba','i.moneda as moneda')
-        ->where('inmueble_id','=',$id_inmueble)
-        ->orderBy('cdet.cuota_nro')
-        ->get();
-        //dd($cuotas);
-
-        $pagos=DB::table('pagos as p')
-        ->join('inmuebles as i','i.id','=','p.inmueble_id')
-        ->select('p.fec_pag as fechapago','p.cuota as cuota_nro','p.cuota_id as cuota_id',
-        'p.total_pag as totalpagado','p.cuota as capitalcuota',
-        DB::raw('0 as saldo'))
-        ->where('p.inmueble_id','=',$id_inmueble)
-        ->orderBy('p.cuota')
-        ->get();
-
-        //dd($pagos);
-        //return view('inmueble.detalleCuotas',["cuotas"=>$cuotas, "pagos"=>$pagos,"cantCuotas"=>$cantCuotas]);
-        return $pdf= \PDF::loadView('inmueble.detalleCuotasPDF',["cuotas"=>$cuotas, "pagos"=>$pagos,"cantCuotas"=>$cantCuotas])
-        ->setPaper('a4', 'portrait')
-        ->stream('detalleCuotasInmPDF.pdf');
-    }
-
-    public function proformaPDF(Request $request)
-    {
-        //dd($request);
-        $cuotas_arr=json_decode($request->cuotas_arr);
-        $precio_inm=$request->precio_inm;
-        $cliente=$request->cliente;
-        //dd($cuotas_arr);
-        return view('inmueble.impresion',["cuotas_arr"=>$cuotas_arr,
-        "cliente"=>$cliente,"precio_inm"=>$precio_inm]);
-    }
-
+    
     public function destroy($id)
     {
         //dd($id);
