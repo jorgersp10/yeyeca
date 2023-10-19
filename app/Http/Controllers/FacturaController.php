@@ -892,7 +892,6 @@ class FacturaController extends Controller
 
     public function imprimirTicketUltimo(Request $request)
     {
-        //dd($request);
         //$monedaSelec = $request->
         $cabVenta=DB::table('ventas as v')
         ->join('ventas_det as vdet','v.id','=','vdet.venta_id')
@@ -908,7 +907,11 @@ class FacturaController extends Controller
         'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo',
         'ven.nombre')
         ->first();
-
+        //dd($cabVenta);
+        if($cabVenta == null)
+        {
+            return back()->with('msj', 'AUN NO HA HECHO NINGUNA VENTA');
+        }
         $venta_id = $cabVenta->id;
 
         /*mostrar detalles*/
