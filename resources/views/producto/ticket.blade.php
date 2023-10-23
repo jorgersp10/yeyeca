@@ -22,7 +22,7 @@
             <div>
                 <div style="text-align:center;" id="timbrado">
                     <img src="{{ public_path('assets/images/modafem.jpg') }}" alt="logo" height="60px" width="80px"/><br>
-                    <p style="text-align:center;">{!! DNS1D::getBarcodeHTML($barcode, 'EAN13',1.8,35) !!}</p>
+                    <p style="text-align:center;">{!! ($barcode) !!}</p>
                     <strong>Codigo:</strong> <b>{{$producto->cod_barra}}</b><br>
                     <strong>Producto:</strong> <b>{{$producto->descripcion}}</b><br>
                     <strong>Precio:</strong> <b>Gs. {{number_format(($producto->precio_venta), 0, ",", ".")}}</strong>

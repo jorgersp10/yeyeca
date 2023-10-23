@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Redirect;
+use Picqer\Barcode\BarcodeGenerator;
+use Picqer\Barcode\BarcodeGeneratorPNG;
+use Picqer\Barcode\BarcodeGeneratorHTML;
 use DB;
 class ProductoController extends Controller
 {
@@ -281,12 +284,19 @@ class ProductoController extends Controller
         //dd($producto);
         $pruebaBar = $producto->cod_barra;
         //dd($pruebaBar);
-        $barcode = str_pad($producto->cod_barra, 12, "0", STR_PAD_LEFT);
+        //$barcode = str_pad($producto->cod_barra, 12, "0", STR_PAD_LEFT);
+
+        //$data = '123456789012';
+
+        // Genera el código de barras en formato HTML
+        $generator = new BarcodeGeneratorHTML();
+        //echo $generator->getBarcode('081231723897', $generator::TYPE_CODE_128);
+        $barcode = $generator->getBarcode($producto->cod_barra, $generator::TYPE_EAN_13, 2, 30);
         //dd($barcode);
         //echo DNS1D::getBarcodeHTML($barcode, 'EAN13');
         
         return $pdf= \PDF::loadView('producto.ticket',["producto"=>$producto,"barcode"=>$barcode])
-            ->setPaper([0, 0, 120, 150], 'landscape')
+            ->setPaper([0, 0, 120, 155], 'landscape')
             ->stream('producto'.$producto->ArtCode.'pdf');
     }
 }
