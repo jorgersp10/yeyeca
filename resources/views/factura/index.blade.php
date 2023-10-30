@@ -95,48 +95,21 @@
                                                     </button>                                    
                                                 </td>
                                                 @endif -->
-                                                @if($ven->contable == 1)
+                                                {{-- @if($ven->contable == 1) --}}
                                                 <td>                                     
                                                     <a href="{{URL::action('App\Http\Controllers\FacturaController@factura_pdf',$ven->id)}}" target="_blank">
                                                         <button type="button" class="btn btn-primary btn-sm" >
-                                                            <i class="fa fa-print fa-1x"></i> IMPRI FACT
+                                                            <i class="fa fa-print fa-1x"></i> FACTURA
                                                         </button>
-                                                    </a>
-                                                </td>     
-                                                @else
-                                                <td> 
-                                                    {{-- <a href="{{URL::action('App\Http\Controllers\FacturaController@imprimirTicket',$ven->id)}}" target="_blank">
-                                                        <button type="button" class="btn btn-warning btn-sm" >
-                                                            <i class="fa fa-print fa-1x"></i> TICKET
-                                                        </button>
-                                                    </a> --}}
-                                                    {{-- <a href="{{url('/imprimirTicket',array($ven->id,"TODO"))}}" target="_blank">
-                                                        <button type="button" class="btn btn-warning btn-sm" >
-                                                            <i class="fa fa-print fa-1x"></i> TICKET
-                                                        </button>
-                                                    </a>
-                                                    <a href="{{url('/imprimirTicket',array($ven->id,"USD"))}}" target="_blank">
-                                                        <button type="button" class="btn btn-danger btn-sm" >
-                                                            <i class="fa fa-print fa-1x"></i> USD
-                                                        </button>
-                                                    </a>
-                                                    <a href="{{url('/imprimirTicket',array($ven->id,"PS"))}}" target="_blank">
-                                                        <button type="button" class="btn btn-info btn-sm" >
-                                                            <i class="fa fa-print fa-1x"></i> P$
-                                                        </button>
-                                                    </a> --}}
+                                                    </a>   
+                                                {{-- @else --}}
                                                     <a href="{{url('/imprimirTicket',array($ven->id,"GS"))}}" target="_blank">
                                                         <button type="button" class="btn btn-warning btn-sm" >
                                                             <i class="fa fa-print fa-1x"></i> TICKET
                                                         </button>
                                                     </a>
-                                                    {{-- <a href="{{url('/imprimirTicket',array($ven->id,"RS"))}}" target="_blank">
-                                                        <button type="button" class="btn btn-dark btn-sm" >
-                                                            <i class="fa fa-print fa-1x"></i> R$
-                                                        </button>
-                                                    </a> --}}
                                                 </td>    
-                                                @endif
+                                                {{-- @endif --}}
                                                 <td>                                     
                                                     <a href="{{URL::action('App\Http\Controllers\FacturaController@show', $ven->id)}}">
                                                         <button type="button" class="btn btn-success btn-sm" >

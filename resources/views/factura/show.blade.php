@@ -42,7 +42,7 @@
                     <div class="form-group row">
                         <label class="col-md-2 form-control-label"><b>Factura N°:</b></label>
                         <div class="col-md-3">
-                            <input readonly type="text" id="fact_nro" name="fact_nro" class="form-control" value="{{$ventas->nro_recibo}}">  
+                            <input readonly type="text" id="fact_nro" name="fact_nro" class="form-control" value="{{$ventas->fact_nro}}">  
                         </div>
                         <label class="col-md-2 form-control-label"><b>Fecha de Compra:</b></label>
                         <div class="col-md-3">

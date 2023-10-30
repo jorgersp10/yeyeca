@@ -335,7 +335,7 @@ class FacturaController extends Controller
             $venta->ivaTotal = $request->total_iva;
             $venta->exenta = $request->exenta;
             $venta->total = $request->total_pagar;
-            $venta->tipo_factura = 1;
+            $venta->tipo_factura = 0;
             $venta->estado = 0;
             $venta->user_id = auth()->user()->id;
             $venta->suc_nro = $timbrados[0]->nrof_suc;
@@ -1197,6 +1197,7 @@ class FacturaController extends Controller
         ->select('v.id','v.fact_nro','v.fecha','v.total','c.nombre','v.iva5',
         'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo',
         DB::raw('sum(vdet.cantidad_calculo*precio) as total'))
+        ->where('v.id','=',$id)
         ->orderBy('v.id', 'desc')
         ->groupBy('v.id','v.fact_nro','v.fecha','v.total','c.nombre','v.iva5',
         'v.iva10','v.ivaTotal','v.exenta','v.tipo_factura','c.num_documento','v.nro_recibo')

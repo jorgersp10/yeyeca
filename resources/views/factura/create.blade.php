@@ -114,7 +114,7 @@
                             </div>
                         </div> --}}
                         <form id="form_mora" action="{{route('factura.store')}}" method="POST"> 
-                        <input hidden type="text" id="contable" name="contable" value=0 class="form-control">
+                        {{-- <input hidden type="text" id="contable" name="contable" value=0 class="form-control"> --}}
                         <div class="form-group row">
                             <div hidden class="col-md-4">
                                 <label class="col-md-5 form-control-label" for="precio">Buscador</label>
@@ -128,15 +128,35 @@
                                     <input type="number" id="cantidad" name="cantidad" class="form-control" value=1 placeholder="Ingrese cantidad">
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-3">
                                 <label class="col-md-5 form-control-label" for="cantidad">Vendedor/a</label>
                                 <div class="mb-3">
-                                    <select style= "width:280px" class="form-control" name="vendedor_id" id="vendedor_id">  
+                                    <select style= "width:200px" class="form-control" name="vendedor_id" id="vendedor_id">  
                                         <option disabled value="0">Seleccione</option>                     
                                         @foreach($vendedores as $v)                                    
                                             <option value="{{$v->id}}">{{$v->nombre}}</option>                                        
                                         @endforeach
                                     </select>                                
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <label class="col-md-3 form-control-label" for="documento">FACTURAR</label>
+                                
+                                <div class="mb-3">
+                                
+                                    <select class="form-control" name="contable" id="contable">                                                                        
+                                        <option disabled>Seleccione</option>
+                                        <option value="1">SI</option>
+                                        <option value="0">NO</option>
+
+                                    </select>
+                                
+                                </div>
+                            </div>                        
+                            <div class="col-md-2">
+                                <label class="col-md-5 form-control-label" for="precio">N° Factura</label>
+                                <div class="mb-3">
+                                    <input type="text" id="fact_nro" name="fact_nro" class="form-control" placeholder="Ingrese nro de factura" required>
                                 </div>
                             </div>
                         </div>
@@ -429,8 +449,21 @@
 @endsection
 
 @section('script')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        console.log("entra a facurrars");
+        $("#contable").change( function() {
+            if ($(this).val() === "0") {
+                $("#fact_nro").prop("readonly", true);
+            } else {
+                $("#fact_nro").prop("readonly", false);
+            }
+        });
+        
+    });
+    </script>
 
     <script>
         // Get the input field
