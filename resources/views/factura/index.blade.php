@@ -68,8 +68,10 @@
                                             <!-- @if(auth()->user()->idrol == 1)   
                                             <th  data-priority="1">Borrar</th>
                                             @endif -->
-                                            <th  data-priority="1">Imprimir</th>
-                                            <th  data-priority="1">Ver Detalle</th>
+                                            <th  data-priority="1">Factura</th>
+                                            <th  data-priority="1">Recibo</th>
+                                            <th  data-priority="1">Ticket</th>
+                                            <th  data-priority="1">Detalle</th>
                                             <th  data-priority="1">Fecha</th>
                                             <th  data-priority="1">Fact. / Orden N°</th>
                                             <th  data-priority="1">Cliente</th>
@@ -95,16 +97,35 @@
                                                     </button>                                    
                                                 </td>
                                                 @endif -->
-                                                {{-- @if($ven->contable == 1) --}}
+                                                @if($ven->contable == 1)
                                                 <td>                                     
                                                     <a href="{{URL::action('App\Http\Controllers\FacturaController@factura_pdf',$ven->id)}}" target="_blank">
                                                         <button type="button" class="btn btn-primary btn-sm" >
                                                             <i class="fa fa-print fa-1x"></i> FACTURA
                                                         </button>
-                                                    </a>   
-                                                {{-- @else --}}
+                                                    </a> 
+                                                </td>  
+                                                @else
+                                                <td> 
+                                                    <a href="{{URL::action('App\Http\Controllers\FacturaController@factura_pdf_orden',$ven->id)}}" target="_blank">
+                                                            <button type="button" class="btn btn-warning btn-sm" >
+                                                                <i class="fa fa-print fa-1x"></i> RECIBO
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </td>
+                                                @endif
+                                                <td> 
+                                                    <a href="{{URL::action('App\Http\Controllers\FacturaController@factura_pdf_orden',$ven->id)}}" target="_blank">
+                                                            <button type="button" class="btn btn-warning btn-sm" >
+                                                                <i class="fa fa-print fa-1x"></i> RECIBO
+                                                            </button>
+                                                        </a>
+                                                    </td>
+                                                </td>
+                                                <td>
                                                     <a href="{{url('/imprimirTicket',array($ven->id,"GS"))}}" target="_blank">
-                                                        <button type="button" class="btn btn-warning btn-sm" >
+                                                        <button type="button" class="btn btn-info btn-sm" >
                                                             <i class="fa fa-print fa-1x"></i> TICKET
                                                         </button>
                                                     </a>

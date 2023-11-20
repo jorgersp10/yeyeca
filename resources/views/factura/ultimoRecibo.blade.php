@@ -117,7 +117,7 @@
                     
                         {{-- <strong>RUC:</strong> 6698924-8<br> --}}
                         <strong>RECIBO DE DINERO</strong><br>
-                        <strong>NRO:</strong> {{$ventas[0]->nro_recibo}}<br>
+                        <strong>NRO:</strong> {{$ventas->nro_recibo}}<br>
                     
                 </div>
                 <div class="Column" id="ruc">
@@ -131,19 +131,19 @@
         <div class="Row">
             <div style="width:60%" class="Column" id="encabezado">                
                 <strong>{{$diafecha}} de {{$mesLetra}} de {{$agefecha}}</strong><br>
-                <strong  >SEÑORES: {{$ventas[0]->nombre}} </strong><br>
-                <strong>DIRECCION: {{$ventas[0]->direccion}} </strong><br>
+                <strong  >SEÑORES: {{$ventas->nombre}} </strong><br>
+                <strong>DIRECCION: {{$ventas->direccion}} </strong><br>
             </div>
             <div class="Column" id="encabezado">
                 
                 <strong></strong><br>
                 <strong></strong><br>
-                <strong>TELEFONO: {{$ventas[0]->telefono}} </strong><br>
+                <strong>TELEFONO: {{$ventas->telefono}} </strong><br>
             </div>
             <div class="Column" id="encabezado">
                 
                 <strong></strong><br>
-                <strong>RUC/CI: {{$ventas[0]->ruc}} </strong><br>
+                <strong>RUC/CI: {{$ventas->ruc}} </strong><br>
             </div>
         </div>
         <div style="border: 1px solid #0F0807;" id="alturaDiv">
@@ -182,7 +182,7 @@
                         <td colspan=2 id="exe" style="text-align:center;">SUBTOTALES</td>
                         <td id="cinco" style="width:50"></td>
                         <td id="cinco" style="width:50"></td>
-                        <td id="diez" style="text-align:center;width:15% ">{{number_format(($ventas[0]->total), 0, ",", ".")}}</td>
+                        <td id="diez" style="text-align:center;width:15% ">{{number_format(($ventas->total), 0, ",", ".")}}</td>
                 </tr>
                 <tr>
                         <td style="text-align:center;" style="width:1%"></td>
@@ -190,7 +190,7 @@
                         <td colspan=2 id="exe" style="text-align:center;">TOTAL A PAGAR</td>
                         <td id="cinco" style="width:50"></td>
                         <td id="cinco" style="width:50"></td>
-                        <td id="diez" style="text-align:center;width:15% ">{{number_format(($ventas[0]->total), 0, ",", ".")}}</td>
+                        <td id="diez" style="text-align:center;width:15% ">{{number_format(($ventas->total), 0, ",", ".")}}</td>
                             
                 </tr>
             </table><br>
@@ -217,7 +217,7 @@
                     
                         {{-- <strong>RUC:</strong> 6698924-8<br> --}}
                         <strong>ORDEN DE VENTA</strong><br>
-                        <strong>NRO:</strong> {{$ventas[0]->nro_recibo}}<br>
+                        <strong>NRO:</strong> {{$ventas->nro_recibo}}<br>
                     
                 </div>
                 <div class="Column" id="ruc">
@@ -231,19 +231,19 @@
         <div class="Row">
             <div style="width:60%" class="Column" id="encabezado">                
                 <strong>{{$diafecha}} de {{$mesLetra}} de {{$agefecha}}</strong><br>
-                <strong  >SEÑORES: {{$ventas[0]->nombre}} </strong><br>
-                <strong>DIRECCION: {{$ventas[0]->direccion}} </strong><br>
+                <strong  >SEÑORES: {{$ventas->nombre}} </strong><br>
+                <strong>DIRECCION: {{$ventas->direccion}} </strong><br>
             </div>
             <div class="Column" id="encabezado">
                 
                 <strong></strong><br>
                 <strong></strong><br>
-                <strong>TELEFONO: {{$ventas[0]->telefono}} </strong><br>
+                <strong>TELEFONO: {{$ventas->telefono}} </strong><br>
             </div>
             <div class="Column" id="encabezado">
                 
                 <strong></strong><br>
-                <strong>RUC/CI: {{$ventas[0]->ruc}} </strong><br>
+                <strong>RUC/CI: {{$ventas->ruc}} </strong><br>
             </div>
         </div>
         <div style="border: 1px solid #0F0807;" id="alturaDiv">
@@ -282,7 +282,7 @@
                         <td colspan=2 id="exe" style="text-align:center;">SUBTOTALES</td>
                         <td id="cinco" style="width:50"></td>
                         <td id="cinco" style="width:50"></td>
-                        <td id="diez" style="text-align:center;width:15% ">{{number_format(($ventas[0]->total), 0, ",", ".")}}</td>
+                        <td id="diez" style="text-align:center;width:15% ">{{number_format(($ventas->total), 0, ",", ".")}}</td>
                 </tr>
                 <tr>
                         <td style="text-align:center;" style="width:1%"></td>
@@ -290,7 +290,7 @@
                         <td colspan=2 id="exe" style="text-align:center;">TOTAL A PAGAR</td>
                         <td id="cinco" style="width:50"></td>
                         <td id="cinco" style="width:50"></td>
-                        <td id="diez" style="text-align:center;width:15% ">{{number_format(($ventas[0]->total), 0, ",", ".")}}</td>
+                        <td id="diez" style="text-align:center;width:15% ">{{number_format(($ventas->total), 0, ",", ".")}}</td>
                             
                 </tr>
             </table><br>

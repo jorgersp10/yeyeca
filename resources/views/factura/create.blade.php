@@ -32,40 +32,54 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <form id="form_mora" action="{{ route('imprimirTicketUltimo') }}" method="POST" target="_blank">
-                                @csrf
-                                <div class="form-group row">
-                                    <div class="col-sm-4">
-                                        <button type="submit" class="btn btn-warning btn-md">
-                                            <i class="fa fa-print fa-1x"></i> IMPRIMIR TICKET
-                                        </button>
+                            <div class="col-md-5">
+                                <form id="form_mora" action="{{ route('imprimirTicketUltimo') }}" method="POST" target="_blank">
+                                    @csrf
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <button type="submit" class="btn btn-warning btn-md">
+                                                <i class="fa fa-print fa-1x"></i> ÚLTIMO TICKET
+                                            </button>
+                                        </div>
+                                        <div hidden class="col-sm-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="moneda" value="USD" class="form-control">
+                                                <label class="form-check-label" for="USD">USD</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="moneda" value="PS" class="form-control">
+                                                <label class="form-check-label" for="PS">PESOS</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="moneda" value="GS" class="form-control" checked>
+                                                <label class="form-check-label" for "GS">GUARANÍES</label>
+                                            </div>
+                                        </div>
+                                        <div hidden class="col-sm-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="moneda" value="RS" class="form-control">
+                                                <label class="form-check-label" for="RS">REALES</label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="moneda" value="TODO" class="form-control">
+                                                <label class="form-check-label" for="TODO">TODAS</label>
+                                            </div>
+                                        </div>                                    
                                     </div>
-                                    <div hidden class="col-sm-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="moneda" value="USD" class="form-control">
-                                            <label class="form-check-label" for="USD">USD</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="moneda" value="PS" class="form-control">
-                                            <label class="form-check-label" for="PS">PESOS</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="moneda" value="GS" class="form-control" checked>
-                                            <label class="form-check-label" for "GS">GUARANÍES</label>
-                                        </div>
+                                </form>
+                            </div>
+                            <div class="col-md-5">
+                                <form id="form_mora" action="{{ route('ultimo_recibo') }}" method="POST" target="_blank">
+                                    @csrf
+                                    <div class="form-group row">
+                                        <div class="col-sm-4">
+                                            <button type="submit" class="btn btn-info btn-md">
+                                                <i class="fa fa-print fa-1x"></i> ÚLTIMO RECIBO
+                                            </button>
+                                        </div>                                   
                                     </div>
-                                    <div hidden class="col-sm-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="moneda" value="RS" class="form-control">
-                                            <label class="form-check-label" for="RS">REALES</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="moneda" value="TODO" class="form-control">
-                                            <label class="form-check-label" for="TODO">TODAS</label>
-                                        </div>
-                                    </div>                                    
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                         
                         </div>

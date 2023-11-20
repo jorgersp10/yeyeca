@@ -96,6 +96,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('obtenerProductosB/{codigo}', [FacturaController::class, 'obtenerProductosB'])->name('obtenerProductosB'); //aca de prueba
     Route::get('/imprimirTicket/{id}/{tc}', [FacturaController::class, 'imprimirTicket'])->name('imprimirTicket'); //aca de prueba
     Route::post('imprimirTicketUltimo', [FacturaController::class, 'imprimirTicketUltimo'])->name('imprimirTicketUltimo'); //aca de prueba
+    Route::post('ultimo_recibo', [FacturaController::class, 'ultimo_recibo'])->name('ultimo_recibo'); //aca de prueba
 
 
     Route::post('update_facNro', [FacturaController::class, 'update_facNro'])->name('update_facNro');

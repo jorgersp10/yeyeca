@@ -1529,6 +1529,52 @@ class FacturaController extends Controller
          ->stream('Factura'.$id.'.pdf');
     }
 
+    public function ultimo_recibo()
+     {
+        //$id = $request->id;
+        $ventas=DB::table('ventas as v')
+        ->join('ventas_det as vdet','v.id','=','vdet.venta_id')
+        ->join('clientes as c','c.id','=','v.cliente_id')
+        ->select('v.id','v.fact_nro','v.fecha','v.total','c.nombre','c.num_documento as ruc',
+        'c.direccion','c.telefono','v.iva5','v.iva10','v.ivaTotal','v.exenta','v.tipo_factura',
+        'c.num_documento','v.nro_recibo')
+        //->where('v.id','=',$id)
+        ->orderBy('v.id', 'desc')
+        ->first();
+
+        /*mostrar detalles*/
+        $detalles=DB::table('ventas_det as vdet')
+        ->join('productos as p','vdet.producto_id','=','p.id')
+        ->select('vdet.id','vdet.precio','p.descripcion as producto',
+        DB::raw('sum(vdet.cantidad*precio) as subtotal'),
+        DB::raw('sum(vdet.cantidad) as cantidad'))
+        ->where('vdet.venta_id','=',$ventas->id)
+        ->groupby('vdet.precio','p.descripcion','vdet.id')
+        ->orderBy('vdet.id', 'desc')->get();
+        //dd($detalles);
+        $fechaahora2 = Carbon::parse($ventas->fecha);
+        //dd($fechaahora2);
+        //EL DIA DE LA FECHA FORMATEADO CON CARGBON
+        $diafecha = Carbon::parse($ventas->fecha)->format('d');
+        //dd($diafecha);
+        $mesLetra = ($fechaahora2->monthName); //y con esta obtengo el mes al fin en espaﾃｱol!
+        //OBTENER EL Aﾃ前
+        $agefecha = Carbon::parse($fechaahora2)->year;
+        //dd($agefecha);
+
+        $tp = $ventas->total;
+        //dd($tp);
+       
+        $tot_pag_let=NumerosEnLetras::convertir($tp,'Guaranies',false,'Centavos');
+        
+        //dd($detalles);
+        //return view('factura.facturaPDF',['ventas' => $ventas,'detalles' =>$detalles]);
+        return $pdf= PDF::loadView('factura.ultimoRecibo',['ventas' => $ventas,'detalles' =>$detalles,
+        'diafecha' =>$diafecha,'mesLetra' =>$mesLetra,'agefecha' =>$agefecha,'tot_pag_let' =>$tot_pag_let])
+         ->setPaper([0, 0, 702.2835, 1150.087], 'portrait')
+         ->stream('Factura'.$ventas->id.'.pdf');
+    }
+
     public function buscador(Request $request0)
     {
         $data=trim($request->valor);
