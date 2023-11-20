@@ -51,7 +51,7 @@
             <input type="hidden" id="id_producto" name="id_producto"  value={{$producto->id}}>
             {{--<div class="container-fluid">--}}
 
-         <div class="row mb-4">
+         <div hidden class="row mb-4">
                 <label hidden for="horizontal-firstname-input" class="col-sm-2 col-form-label">Codigo</label>
                 <div hidden class="col-sm-3">
                     <input type="text" id="ArtCode" value="{{$producto->ArtCode}}" name="ArtCode" class="form-control" placeholder="Ingrese el Nombre">
