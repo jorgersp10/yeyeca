@@ -1542,6 +1542,11 @@ class FacturaController extends Controller
         ->orderBy('v.id', 'desc')
         ->first();
 
+        if($ventas == null)
+        {
+            return back()->with('msj', 'AUN NO HA HECHO NINGUNA VENTA');
+        }
+
         /*mostrar detalles*/
         $detalles=DB::table('ventas_det as vdet')
         ->join('productos as p','vdet.producto_id','=','p.id')
