@@ -123,6 +123,7 @@
                                                         </a>
                                                     </td>
                                                 </td> --}}
+                                                @if($ven->contable == 0)
                                                 <td>
                                                     <a href="{{url('/imprimirTicket',array($ven->id,"GS"))}}" target="_blank">
                                                         <button type="button" class="btn btn-info btn-sm" >
@@ -130,6 +131,15 @@
                                                         </button>
                                                     </a>
                                                 </td>    
+                                                @else
+                                                <td>
+                                                    
+                                                        <button disabled type="button" class="btn btn-info btn-sm" >
+                                                            <i class="fa fa-print fa-1x"></i> TICKET
+                                                        </button>
+                                                    
+                                                </td> 
+                                                @endif
                                                 {{-- @endif --}}
                                                 <td>                                     
                                                     <a href="{{URL::action('App\Http\Controllers\FacturaController@show', $ven->id)}}">
