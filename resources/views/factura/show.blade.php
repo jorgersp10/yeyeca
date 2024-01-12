@@ -53,7 +53,7 @@
                     <div class="form-group row">
                         <label class="col-md-2 form-control-label"><b>Tipo Factura:</b></label>
                         <div class="col-md-3">
-                            @if($ventas->tipo_factura == 1)
+                            @if($ventas->tipo_factura == 0)
                                 <p>Contado</p>  
                                 @else
                                 <p>Crédito</p>     
