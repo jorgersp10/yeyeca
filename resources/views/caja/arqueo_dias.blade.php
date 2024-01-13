@@ -178,7 +178,11 @@
                         <tr>                                    
                             {{-- <td>{{ date('d-m-Y', strtotime($ar->fechapago)) }}</td> --}}
                             <td>{{$ar->cliente}}</td>
-                            <td>{{$ar->producto}}</td>
+                            @if($ar->contable == 0)
+                            <td>Ticket {{$ar->producto}}</td>
+                            @else
+                            <td>Fact. N° {{$ar->fact_nro}}</td>
+                            @endif
                             <td>Gs. {{number_format(($ar->importe), 0, ",", ".")}} </td>  
                             <td>Gs. {{number_format($ar->total_pagf, 0, ",", ".")}}</td>
                             <td>Gs. {{number_format($ar->total_pagtr, 0, ",", ".")}}</td>

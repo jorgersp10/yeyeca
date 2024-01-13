@@ -35,7 +35,7 @@
                                         <tr>
                                             {{-- <th data-priority="1">Fecha</th> --}}
                                             <th data-priority="1">Cliente</th>
-                                            <th data-priority="1">Pago / Factura Nro</th>
+                                            <th data-priority="1">Factura/Recibo</th>
                                             <th data-priority="1">Importe</th>
                                             <th data-priority="1">Efectivo</th>
                                             <th data-priority="1">Transf</th>
@@ -62,7 +62,11 @@
                                                 <tr>                                    
                                                     {{-- <td>{{ date('d-m-Y', strtotime($ar->fechapago)) }}</td> --}}
                                                     <td>{{$ar->cliente}}</td>
+                                                    @if($ar->contable == 0)
                                                     <td>Ticket {{$ar->producto}}</td>
+                                                    @else
+                                                    <td>Fact. N° {{$ar->fact_nro}}</td>
+                                                    @endif
                                                     <td>Gs. {{number_format(($ar->importe), 0, ",", ".")}} </td>  
                                                     <td>Gs. {{number_format($ar->total_pagf, 0, ",", ".")}}</td>
                                                     <td>Gs. {{number_format($ar->total_pagtr, 0, ",", ".")}}</td>
