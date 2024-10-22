@@ -58,8 +58,11 @@
                                             <tr>  
                                             @if(auth()->user()->idrol == 1)
                                             <th  data-priority="1">Acciones</th> 
-                                            @endif                             
-                                            <th  data-priority="1">Codigo/Imprimir</th>
+                                            @endif      
+                                            @if(auth()->user()->id == 1)
+                                            <th  data-priority="1">Imagen</th> 
+                                            @endif                      
+                                            <th  data-priority="1">Codigo/Imprimir</th>                                            
                                             <th  data-priority="1">Nombre</th> 
                                             <th  data-priority="1">Stock</th> 
                                             <th  data-priority="1">Precio Gs.</th> 
@@ -69,6 +72,7 @@
 
                                          @foreach($productos as $prod)
                                             @if(auth()->user()->idrol == 1) 
+                                        <tr> 
                                             <td>
                                     
                                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#borrarRegistro-{{$prod->id}}">
@@ -80,13 +84,14 @@
                                                         <i class="fa fa-success fa-1x"></i> Detalles
                                                     </button>
                                                 </a>
-                                                {{-- <a href="{{URL::action('App\Http\Controllers\ProductoController@show', $prod->id)}}">
-                                                    <button type="button" class="btn btn-info btn-sm" >
-                                                        <i class="fa fa-success fa-1x"></i> Foto
-                                                    </button>
-                                                </a> --}}
-
                                             </td> 
+                                            @endif
+                                            @if(auth()->user()->id == 1)
+                                                <td>
+                                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#verImagen-{{$prod->imagen_id}}">
+                                                        <i class="fa fa-image"></i> Ver Imagen
+                                                    </button>
+                                                </td>
                                             @endif
                                                 <td>
                                                     <a href="{{URL::action('App\Http\Controllers\ProductoController@imprimirBarcode', $prod->id)}}" target="_blank">
@@ -100,6 +105,7 @@
                                                 <td>Gs. {{number_format(($prod->precio_venta), 0, ",", ".")}}</td>                                                                        
                                             </tr>  
                                             @include('producto.delete')
+                                            @include('producto.verImagen')
                                         @endforeach
                                     
                                     </tbody>
@@ -165,6 +171,7 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
+  
         </div><br>   
                      
     </main>
