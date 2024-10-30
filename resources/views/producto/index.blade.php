@@ -56,12 +56,8 @@
                                 <table id="tech-companies-1" class="table table-striped">                             
                                     <thead>                            
                                             <tr>  
-                                            @if(auth()->user()->idrol == 1)
                                             <th  data-priority="1">Acciones</th> 
-                                            @endif      
-                                            @if(auth()->user()->id == 1)
                                             <th  data-priority="1">Imagen</th> 
-                                            @endif                      
                                             <th  data-priority="1">Codigo/Imprimir</th>                                            
                                             <th  data-priority="1">Nombre</th> 
                                             <th  data-priority="1">Stock</th> 
@@ -71,7 +67,6 @@
                                     <tbody>
 
                                          @foreach($productos as $prod)
-                                            @if(auth()->user()->idrol == 1) 
                                         <tr> 
                                             <td>
                                     
@@ -85,11 +80,16 @@
                                                     </button>
                                                 </a>
                                             </td> 
-                                            @endif
-                                            @if(auth()->user()->id == 1)
+                                            @if($prod->imagen_id != null)
                                                 <td>
                                                     <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#verImagen-{{$prod->imagen_id}}">
                                                         <i class="fa fa-image"></i> Ver Imagen
+                                                    </button>
+                                                </td>
+                                            @else
+                                                <td>
+                                                    <button disabled type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal">
+                                                        <i class="fa fa-image"></i> Sin Imagen
                                                     </button>
                                                 </td>
                                             @endif
