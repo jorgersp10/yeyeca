@@ -836,7 +836,7 @@ class CajaController extends Controller
             //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
             ->join('clientes as cli','cli.id','=','v.cliente_id')
             ->join('users as u','u.id','=','p.usuario_id')
-            ->select('cli.nombre as cliente','v.nro_recibo as producto','v.fact_nro','v.contable',
+            ->select('cli.nombre as cliente','v.nro_recibo as producto',
             'p.total_pag as importe','p.total_pagf','p.total_pagch','p.created_at',
             'p.total_pagtd','p.total_pagtc','p.total_pagtr','p.fec_pag as fechapago')
             ->where('v.estado','=',"0")
@@ -873,7 +873,7 @@ class CajaController extends Controller
             //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
             ->join('clientes as cli','cli.id','=','v.cliente_id')
             ->join('users as u','u.id','=','p.usuario_id')
-            ->select('cli.nombre as cliente','v.nro_recibo as producto','v.fact_nro','v.contable',
+            ->select('cli.nombre as cliente','v.nro_recibo as producto',
             'p.total_pag as importe','p.total_pagf','p.total_pagch','p.created_at',
             'p.total_pagtd','p.total_pagtc','p.total_pagtr','p.fec_pag as fechapago')
             ->where('v.estado','=',"0")
@@ -924,7 +924,7 @@ class CajaController extends Controller
             //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
             ->join('clientes as cli','cli.id','=','v.cliente_id')
             ->join('users as u','u.id','=','p.usuario_id')
-            ->select('cli.nombre as cliente','v.nro_recibo as producto','v.fact_nro','v.contable',
+            ->select('cli.nombre as cliente','v.nro_recibo as producto',
             'p.total_pag as importe','p.total_pagf','p.total_pagch','p.created_at',
             'p.total_pagtd','p.total_pagtc','p.total_pagtr','p.fec_pag as fechapago')
             ->where('p.fec_pag','=',$fecha_arqueo)
@@ -948,7 +948,7 @@ class CajaController extends Controller
             //->join('cotizaciones as cot','cot.id','=','v.cotiz_id')
             ->join('clientes as cli','cli.id','=','v.cliente_id')
             ->join('users as u','u.id','=','p.usuario_id')
-            ->select('cli.nombre as cliente','v.nro_recibo as producto','v.fact_nro','v.contable',
+            ->select('cli.nombre as cliente','v.nro_recibo as producto',
             'p.total_pag as importe','p.total_pagf','p.total_pagch','p.created_at',
             'p.total_pagtd','p.total_pagtc','p.total_pagtr','p.fec_pag as fechapago')
             ->where('v.estado','=',"0")

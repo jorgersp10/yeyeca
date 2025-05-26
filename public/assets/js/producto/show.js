@@ -23,7 +23,7 @@ $(function() {
     {
         var pro_id = document.getElementById("id_producto").value;
         // para local usar asi
-          let url = '../imagenpro/'+pro_id;
+          let url = '/imagenpro/'+pro_id;
 
         // para la web usar asi
         //let url = '../imagenpro/'+pro_id; 
@@ -49,25 +49,23 @@ $(function() {
             else
             {
                 // para local
-                //urlImagen='http:\\storage/img/electro/'+image.imagen;
+                urlImagen='http:\\storage/img/electro/'+image.imagen;
                 // para la web usar asi
-                urlImagen='../storage/img/electro/'+image.imagen;
+                //urlImagen='../storage/img/electro/'+image.imagen;
             }
             
             // para la web usar asi
             //let urlImagen='../storage/img/electro/'+image.imagen;
             let imagenBorrar='borrarImagen-'+image.id;
             let divBorrar='div-'+image.id;
-            let htmlSegment = ` `;            
-            
+            let htmlSegment = ` `;
+           
                 htmlSegment = `
                 <div id="${divBorrar}" class="button-borrar">
                     <img src="${urlImagen}" id="imagen-${image.id}" alt="" class="galeria-img">
-                    <button type="button"  id="${imagenBorrar}" class="button-borrar">Borrar</button>
                 </div>
                 `;
-
-            
+    
 
             html += htmlSegment;
             });

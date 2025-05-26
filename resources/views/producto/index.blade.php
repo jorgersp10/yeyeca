@@ -56,9 +56,10 @@
                                 <table id="tech-companies-1" class="table table-striped">                             
                                     <thead>                            
                                             <tr>  
+                                            @if(auth()->user()->idrol == 1)
                                             <th  data-priority="1">Acciones</th> 
-                                            <th  data-priority="1">Imagen</th> 
-                                            <th  data-priority="1">Codigo/Imprimir</th>                                            
+                                            @endif                             
+                                            <th  data-priority="1">Codigo/Imprimir</th>
                                             <th  data-priority="1">Nombre</th> 
                                             <th  data-priority="1">Stock</th> 
                                             <th  data-priority="1">Precio Gs.</th> 
@@ -67,7 +68,7 @@
                                     <tbody>
 
                                          @foreach($productos as $prod)
-                                        <tr> 
+                                            @if(auth()->user()->idrol == 1) 
                                             <td>
                                     
                                                 <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#borrarRegistro-{{$prod->id}}">
@@ -79,19 +80,13 @@
                                                         <i class="fa fa-success fa-1x"></i> Detalles
                                                     </button>
                                                 </a>
+                                                {{-- <a href="{{URL::action('App\Http\Controllers\ProductoController@show', $prod->id)}}">
+                                                    <button type="button" class="btn btn-info btn-sm" >
+                                                        <i class="fa fa-success fa-1x"></i> Foto
+                                                    </button>
+                                                </a> --}}
+
                                             </td> 
-                                            @if($prod->imagen_id != null)
-                                                <td>
-                                                    <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#verImagen-{{$prod->imagen_id}}">
-                                                        <i class="fa fa-image"></i> Ver Imagen
-                                                    </button>
-                                                </td>
-                                            @else
-                                                <td>
-                                                    <button disabled type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal">
-                                                        <i class="fa fa-image"></i> Sin Imagen
-                                                    </button>
-                                                </td>
                                             @endif
                                                 <td>
                                                     <a href="{{URL::action('App\Http\Controllers\ProductoController@imprimirBarcode', $prod->id)}}" target="_blank">
@@ -105,7 +100,6 @@
                                                 <td>Gs. {{number_format(($prod->precio_venta), 0, ",", ".")}}</td>                                                                        
                                             </tr>  
                                             @include('producto.delete')
-                                            @include('producto.verImagen')
                                         @endforeach
                                     
                                     </tbody>
@@ -171,7 +165,6 @@
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal-dialog -->
                     </div><!-- /.modal -->
-  
         </div><br>   
                      
     </main>

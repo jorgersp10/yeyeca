@@ -16,9 +16,7 @@
 <div class="menu card-header">
     
     <button style="margin: 10px" type="button" class="btn btn-primary waves-effect waves-light" data-target="#men_det">Producto</button><br>
-    @if(auth()->user()->id == 1)
-    <button style="margin: 10px" type="button" class="btn btn-primary waves-effect waves-light" data-target="#men_img">Imagenes</button><br>
-    @endif
+    <button hidden style="margin: 10px" type="button" class="btn btn-primary waves-effect waves-light" data-target="#men_img">Imagenes</button><br>
     <a href="javascript:history.back()"><button style="margin: 10px" type="button" class="btn btn-primary waves-effect waves-light">Atrás</button></a><br>
 
 

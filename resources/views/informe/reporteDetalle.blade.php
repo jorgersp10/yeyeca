@@ -224,7 +224,7 @@
 
                 <div class="card">
                     <div class="card-header">
-                       <h2>Productos mas vendidos (MONTO EN GS) por rango de fecha</h2><br/>
+                       <h2>Productos mas vendidos (MONTO EN USD) por rango de fecha</h2><br/>
                     </div>
                     <div class="card-body">
                         <div class="form-group row">

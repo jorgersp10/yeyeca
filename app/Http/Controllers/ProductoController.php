@@ -23,16 +23,16 @@ class ProductoController extends Controller
             //Buscador de texto en el view y tambien la consula para mostrar datos en el index
             $sql=trim($request->get('buscarTexto'));
             $sql = str_replace(" ", "%", $sql);
-            $productos=DB::table('productos as p')
-            ->join('unidades_medida as uni','uni.id','=','p.medida_id')
-            ->leftjoin('electro_img as img','img.producto_id','=','p.id')
-            ->select('p.id','p.descripcion','p.ArtCode','p.stock'
-            ,'p.precio_compra','p.precio_venta','p.precio_min','p.precio_max',
-            'uni.unidad_medida','p.cod_barra','img.id as imagen_id','img.imagen')
-            ->where('p.descripcion','LIKE','%'.$sql.'%')
-            ->orWhere('p.cod_barra','LIKE','%'.$sql.'%')
-            ->orderBy('p.ordenar','asc')
-            ->orderBy('p.descripcion','asc')
+            $productos=DB::table('productos')
+            ->join('unidades_medida as uni','uni.id','=','productos.medida_id')
+            //->leftjoin('electro_img as img','img.producto_id','=','productos.id')
+            ->select('productos.id','productos.descripcion','productos.ArtCode','productos.stock'
+            ,'productos.precio_compra','productos.precio_venta','productos.precio_min','productos.precio_max',
+            'uni.unidad_medida','productos.cod_barra')
+            ->where('productos.descripcion','LIKE','%'.$sql.'%')
+            ->orWhere('productos.cod_barra','LIKE','%'.$sql.'%')
+            ->orderBy('productos.ordenar','asc')
+            ->orderBy('productos.descripcion','asc')
             ->paginate(10)
             ->withQueryString();
 

@@ -664,7 +664,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio), 2, ".", ","),0,0,'R');
                 $fpdf->Cell(15, -5, "USD ".number_format(($row->precio*$row->cantidad_calculo), 2, ".", ","),0,0,'R');
@@ -718,7 +718,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio), 2, ".", ","),0,0,'R');
                 $fpdf->Cell(15, -5, "USD ".number_format(($row->precio*$row->cantidad_calculo), 2, ".", ","),0,0,'R');
@@ -760,7 +760,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio*$cabVenta->psVenta), 0, ".", ","),0,0,'R');
                 $fpdf->Cell(15, -5, "$ ".number_format(($row->precio*$row->cantidad_calculo*$cabVenta->psVenta), 0, ".", ","),0,0,'R');
@@ -801,7 +801,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(15, -5, "Gs. ".number_format(($row->precio*$row->cantidad_calculo), 0, ",", "."),0,0,'R');
@@ -844,7 +844,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio*$cabVenta->rsVenta), 2, ".", ","),0,0,'R');
                 $fpdf->Cell(15, -5, "R$ ".number_format(($row->precio*$row->cantidad_calculo*$cabVenta->rsVenta), 2, ".", ","),0,0,'R');
@@ -953,7 +953,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio), 2, ".", ","),0,0,'R');
                 $fpdf->Cell(15, -5, "USD ".number_format(($row->precio*$row->cantidad_calculo), 2, ".", ","),0,0,'R');
@@ -1007,7 +1007,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio), 2, ".", ","),0,0,'R');
                 $fpdf->Cell(15, -5, "USD ".number_format(($row->precio*$row->cantidad_calculo), 2, ".", ","),0,0,'R');
@@ -1049,7 +1049,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio*$cabVenta->psVenta), 0, ".", ","),0,0,'R');
                 $fpdf->Cell(15, -5, "$ ".number_format(($row->precio*$row->cantidad_calculo*$cabVenta->psVenta), 0, ".", ","),0,0,'R');
@@ -1090,7 +1090,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(15, -5, "Gs. ".number_format(($row->precio*$row->cantidad_calculo), 0, ",", "."),0,0,'R');
@@ -1133,7 +1133,7 @@ class FacturaController extends Controller
             foreach($detallesVenta as $row)
             {
                 $fpdf->SetFont('Helvetica', '', 7);
-                $fpdf->MultiCell(20,4,$row->producto,0,'L'); 
+                $fpdf->MultiCell(20,4,$row->codigo,0,'L'); 
                 $fpdf->Cell(25, -5, number_format(($row->cantidad), 0, ",", "."),0,0,'R');
                 $fpdf->Cell(10, -5, number_format(($row->precio*$cabVenta->rsVenta), 2, ".", ","),0,0,'R');
                 $fpdf->Cell(15, -5, "R$ ".number_format(($row->precio*$row->cantidad_calculo*$cabVenta->rsVenta), 2, ".", ","),0,0,'R');
@@ -1541,7 +1541,7 @@ class FacturaController extends Controller
         //->where('v.id','=',$id)
         ->orderBy('v.id', 'desc')
         ->first();
-        dd($ventas);
+
         if($ventas == null)
         {
             return back()->with('msj', 'AUN NO HA HECHO NINGUNA VENTA');
